@@ -1,0 +1,43 @@
+query ($slug: ID!) {
+  recipe(slug: $slug) {
+    id
+    title
+    slug
+    difficulty
+    prep_time
+    image
+    video
+    ingredient_note
+    body
+    meals {
+      id
+      title
+    }
+    author {
+      id
+      name
+    }
+    categories {
+      id
+      title
+    }
+    steps {
+      id
+      step
+    }
+    ingredients {
+      id
+      amount
+      note
+      ingredient {
+        id
+        title
+        slug
+      }
+    }
+    notes {
+      id
+      body
+    }
+  }
+}

@@ -1,0 +1,8 @@
+query ($term: String) {
+  SearchRecipes (term: $term) {
+    id,
+    title,
+    slug,
+    image
+  }
+}

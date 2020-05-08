@@ -1,0 +1,7 @@
+query {
+  GetAllIngredientsSorted {
+    id
+    title
+    slug
+  }
+}

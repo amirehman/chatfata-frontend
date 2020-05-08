@@ -1,0 +1,33 @@
+<template>
+  <div>
+    <nuxt-link
+      :to="`/recipes/${recipe.slug}`"
+      class="block pl-5 border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-dark-mode-light text-left flex items-center justify-between"
+    >
+      <span class="w-full">{{recipe.title}}</span>
+      <span class="w-24">
+        <client-only>
+          <v-lazy-image
+            :alt="recipe.title"
+            class="w-full rounded"
+            :src="`${storageUrl}${smallImage}`"
+          />
+        </client-only>
+      </span>
+    </nuxt-link>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["recipe"],
+  computed: {
+    smallImage() {
+      return this.recipe.image.replace(/(\.[\w\d_-]+)$/i, "-small$1");
+    },
+    storageUrl() {
+      return this.$store.state.storageUrl;
+    }
+  }
+};
+</script>

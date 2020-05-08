@@ -1,0 +1,7 @@
+ query {
+   ingredients {
+     id
+     title
+     slug
+   }
+ }

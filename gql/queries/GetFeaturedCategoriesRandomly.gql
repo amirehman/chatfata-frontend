@@ -1,0 +1,11 @@
+query {
+  GetFeaturedCategoriesRandomly {
+    id
+    title
+    slug
+    image
+    recipes {
+      id
+    }
+  }
+}

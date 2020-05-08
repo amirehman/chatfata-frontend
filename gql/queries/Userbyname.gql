@@ -1,0 +1,29 @@
+query ($username: ID!) {
+  userbyname(username: $username) {
+    id
+    name
+    info {
+      id
+      about
+      youtube
+    }
+    recipes {
+      id
+      title
+      slug
+      image
+      difficulty
+      prep_time
+      author {
+        id
+        name
+        username
+      }
+      meals {
+        id
+        title
+        slug
+      }
+    }
+  }
+}

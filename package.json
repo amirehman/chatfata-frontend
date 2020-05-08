@@ -1,0 +1,29 @@
+{
+    "name": "shallowfry",
+    "version": "1.0.0",
+    "description": "My majestic Nuxt.js project",
+    "author": "getidea.net",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "generate": "nuxt generate"
+    },
+    "dependencies": {
+        "@nuxtjs/apollo": "^4.0.0-rc19",
+        "graphql-tag": "^2.10.3",
+        "nuxt": "^2.0.0",
+        "swiper": "^5.3.8",
+        "v-lazy-image": "^1.4.0",
+        "vue-awesome-swiper": "^4.1.1",
+        "vue-infinite-loading": "^2.4.5",
+        "vue-keypress": "^2.0.0"
+    },
+    "devDependencies": {
+        "@nuxtjs/tailwindcss": "^1.4.1",
+        "node-sass": "^4.14.0",
+        "sass-loader": "^8.0.2",
+        "tailwindcss-spinner": "^1.0.0"
+    }
+}

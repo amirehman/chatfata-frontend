@@ -1,0 +1,22 @@
+query {
+  recipes {
+    data {
+      id
+      title
+      slug
+      image
+      difficulty
+      prep_time
+      author {
+        id
+        name
+        username
+      }
+      meals {
+        id
+        title
+        slug
+      }
+    }
+  }
+}
