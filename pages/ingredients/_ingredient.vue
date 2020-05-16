@@ -1,6 +1,6 @@
 <template>
-  <section class="recipes-section mt-8 lg:mt-12 px-5 lg:px-0">
-    <div class="container mx-auto">
+  <section class="recipes-section lg:mt-5 px-5 lg:px-0">
+    <div class="max-w-6xl xxl:max-w-screen-xl mx-auto">
       <div class="section-header mb-3 lg:mb-16">
         <div class="flex flex-wrap md:flex-no-wrap">
           <div class="w-full lg:w-64">
@@ -28,7 +28,7 @@
               <!-- category title end -->
 
               <div
-                class="recipe-short-description text-gray-700 dark:text-gray-400 mt-3 text-base xxl:text-lg content"
+                class="recipe-short-description text-gray-700 dark:text-gray-400 mt-3 text-base content"
               >
                 <p>{{ingredient.excerpt}}</p>
               </div>
@@ -45,7 +45,7 @@
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-wrapper"
         >
           <div v-if="ingredient.recipes.length < 1">
-            <h2 class="text-base tracking-widest text-gray-800">Nothing here yet, working on it.</h2>
+            <h2 class="text-base tracking-widest text-gray-800 dark:text-gray-400">Nothing here yet, working on it.</h2>
           </div>
           <div
             v-else
@@ -110,4 +110,10 @@ export default {
     };
   }
 };
+
+// https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=Biryani
+
 </script>
+
+
+

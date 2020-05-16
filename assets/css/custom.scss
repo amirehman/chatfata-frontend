@@ -69,7 +69,7 @@ body {
 }
 
 .v-lazy-image-loaded {
-    filter: blur(0);
+    filter: blur(0)!important;
 }
 
 .z--50 {
@@ -172,6 +172,33 @@ body {
     border-left: 32px solid #fff;
     border-top: 22px solid transparent;
     border-bottom: 22px solid transparent;
+}
+
+.placeholder-animation {
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    background: linear-gradient(to right, #edf2f7 2%, #cbd5e0c4 18%, #edf2f7 33%);
+    animation-name: placeholderAnimate;
+    background-size: 1300px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .placeholder-animation {
+        background: linear-gradient(to right, #353b48 2%, #2f3542 18%, #353b48 33%);
+        animation-name: placeholderAnimate;
+        background-size: 1300px;
+    }
+}
+
+@keyframes placeholderAnimate {
+    0% {
+        background-position: -650px 0;
+    }
+    100% {
+        background-position: 650px 0;
+    }
 }
 
 @keyframes pulse-border {

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <section class="page-section mt-8 lg:mt-12 py-6">
-      <div class="container mx-auto px-5 lg:px-0">
+    <section class="page-section lg:mt-5 py-6">
+      <div class="max-w-6xl xxl:max-w-screen-xl mx-auto px-5 lg:px-0">
         <div class="section-header mb-5">
           <h1 class="text-3xl text-gray-800">
             <span class="text-gray-800 dark:text-gray-200">About</span>

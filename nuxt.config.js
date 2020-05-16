@@ -36,22 +36,18 @@ export default {
     /*
      ** Global CSS
      */
-    css: ["swiper/css/swiper.css", "~/assets/css/custom.scss"],
+    css: ["swiper/css/swiper.min.css", "~/assets/css/custom.scss"],
     /*
      ** Plugins to load before mounting the App
      */
     plugins: [
-        { src: "~/plugins/vue-awesome-swiper", mode: "client" },
-        { src: "~/plugins/v-lazy-image", ssr: false },
-        { src: "~/plugins/vue-infinite-loading", mode: "client" }
+        { src: "~/plugins/vue-awesome-swiper", ssr: false },
+        { src: "~/plugins/v-lazy-image", ssr: false }
     ],
     /*
      ** Nuxt.js dev-modules
      */
-    buildModules: [
-        // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-        "@nuxtjs/tailwindcss"
-    ],
+    buildModules: ["@nuxtjs/tailwindcss", "@nuxtjs/pwa"],
     /*
      ** Nuxt.js modules
      */
@@ -61,10 +57,19 @@ export default {
         middleware: ["OnRouteChange"]
     },
 
+    purgeCSS: {
+        whitelist: ["v-lazy-image-loaded"]
+    },
+
     apollo: {
+        includeNodeModules: true,
+        introspection: true,
+        tokenName: 'apollo-token',
+        errorHandler: '~/plugins/apollo-error-handler.js',
         clientConfigs: {
             default: {
-                httpEndpoint: "http://127.0.0.1:8000/graphql"
+                httpEndpoint: "http://127.0.0.1:8000/graphql",
+                wsEndpoint: null,
             }
         }
     },

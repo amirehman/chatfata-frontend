@@ -1,28 +1,28 @@
 <template>
   <div>
-    <section class="categories-section mt-8 lg:mt-12 py-6">
-      <div class="container mx-auto px-5 lg:px-0">
+    <section class="categories-section lg:mt-5 py-6">
+      <div class="max-w-6xl xxl:max-w-screen-xl mx-auto px-5 lg:px-0">
         <div class="section-header mb-5">
-          <h1 class="text-3xl font-bold text-gray-800">Browse Recipe by Category</h1>
+          <h1 class="capitalize text-2xl text-gray-900 dark:text-gray-300">Browse Recipe by Category</h1>
         </div>
         <!-- section header end -->
 
-        <client-only>
-          <swiper class="swiper" :options="swiperOption">
-            <swiper-slide v-for="(category, i) in categories" :key="i">
+        <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="swiper">
+          <div class="swiper-wrapper relative">
+            <div class="swiper-slide" v-for="(category, i) in categories" :key="i">
               <SingleCategory :category="category" />
-            </swiper-slide>
-          </swiper>
-        </client-only>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- container end -->
     </section>
     <!-- cotegories section end -->
 
     <section class="recipes-section mt-12 px-5 lg:px-0">
-      <div class="container mx-auto">
+      <div class="max-w-6xl xxl:max-w-screen-xl mx-auto">
         <div class="section-header mb-3 lg:mb-5">
-          <h1 class="capitalize text-3xl font-bold text-gray-800">
+          <h1 class="capitalize text-2xl text-gray-900 dark:text-gray-300">
             Just For you
             <span class="tracking-widest">...</span>
           </h1>
@@ -34,7 +34,7 @@
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-wrapper"
           >
             <div
-              class="pb-10 relative recipe-item border rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out"
+              class="pb-10 relative recipe-item border dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out"
               v-for="(recipe, i) in recipes"
               :key="i"
             >
@@ -75,12 +75,22 @@ export default {
     return {
       isMenuOpen: false,
       swiperOption: {
-        slidesPerView: 6,
+        slidesPerView: 5,
         spaceBetween: 12,
         freeMode: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
+        breakpoints: {
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 12
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 12,
+          },
+          480: {
+            slidesPerView: 1,
+            spaceBetween: 12,
+          }
         }
       }
     };

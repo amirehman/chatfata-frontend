@@ -16,7 +16,9 @@
       <!-- ri img -->
 
       <div class="ri-info p-3">
-        <div class="flex text-lg xxl:text-xl capitalize leading-tight font-normal text-gray-900 dark:text-gray-400">
+        <div
+          class="flex xxl:text-lg text-base capitalize leading-tight font-normal text-gray-900 dark:text-gray-400"
+        >
           <div class="w-full">
             <h3>
               <nuxt-link
@@ -26,7 +28,8 @@
             </h3>
             <p class="text-sm pt-2">
               By
-              <nuxt-link :to="`/${recipe.author.username}`"
+              <nuxt-link
+                :to="`/${recipe.author.username}`"
                 href
                 class="hover:underline hover:text-orange-700 dark:hover:text-orange-400 transition duration-300"
               >{{recipe.author.name}}</nuxt-link>
@@ -42,7 +45,7 @@
       <!-- ri info end -->
 
       <div
-        class="absolute bottom-0 left-0 w-full border-t dark:border-gray-700 ri-footer p-3 py-2 tracking-wider text-gray-900 dark:text-gray-400"
+        class="absolute bottom-0 left-0 text-sm w-full border-t dark:border-gray-700 ri-footer p-3 py-2 tracking-wider text-gray-900 dark:text-gray-400"
       >
         <div class="flex">
           <div class="w-full flex items-center">
@@ -79,6 +82,14 @@ export default {
     },
     storageUrl() {
       return this.$store.state.storageUrl;
+    },
+    currentUser() {
+      return this.$store.state.user.loggedInUser;
+    },
+    validUser() {
+      if (this.currentUser) {
+        return this.recipe.author.id == this.currentUser.id ? true : false;
+      }
     }
   }
 };

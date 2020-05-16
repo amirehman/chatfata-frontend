@@ -1,0 +1,12 @@
+query{
+  me {
+    id
+    name
+    username
+    email
+    roles {
+      name
+    }
+  }
+}
+

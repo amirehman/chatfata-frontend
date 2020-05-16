@@ -16,6 +16,7 @@ query ($slug: ID!) {
     author {
       id
       name
+      username
     }
     categories {
       id

@@ -15,18 +15,21 @@ import Header from "~/components/templates/Header.vue";
 import Footer from "~/components/templates/Footer.vue";
 
 export default {
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
   components: {
     SideNav,
     Header,
     Footer
   },
+  mounted() {
+    this.$store.commit("user/receiveToken", this.$apolloHelpers.getToken() || null);
+    this.$store.dispatch("user/getUser");
+  },
   computed: {
-    theme () {
-      return this.$store.state.theme
+    theme() {
+      return this.$store.state.theme;
     }
   }
 };

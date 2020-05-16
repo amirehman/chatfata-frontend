@@ -8,20 +8,26 @@ module.exports = {
                 xxxl: "1650px"
             },
             colors: {
+                "theme-yellow-dark": "#f9c22e",
+                "theme-yellow": "#fca311",
                 "theme-red": "#c0392b",
                 "theme-red-dark": "#d9c10c",
                 "theme-orange": "#e67e22",
                 "dark-mode": "#2f3542",
             },
             backgroundColor: theme => ({
+                "theme-yellow-dark": "#f9c22e",
+                "theme-yellow": "#fca311",
                 "theme-orange": "#e67e22",
                 "theme-red": "#c0392b",
                 "white-trans-95": "rgba(255,255,255, 0.95)",
                 "black-trans-95": "rgba(0,0,0, 0.95)",
                 "dark-mode": "#2f3542",
                 "dark-mode-light": "#353b48",
+                "dark-mode-light-1": "#484f5d",
             }),
             spacing: {
+                "1.7rem": "1.7rem",
                 "3.1rem": "3.1rem",
                 "20rem": "20rem",
                 "22rem": "22rem",

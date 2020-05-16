@@ -1,11 +1,20 @@
-query ($username: ID!) {
+query($username: ID!) {
   userbyname(username: $username) {
     id
     name
+    avatar
     info {
       id
       about
-      youtube
+    }
+    social {
+      id
+      link
+      media {
+        id
+        name
+        icon
+      }
     }
     recipes {
       id

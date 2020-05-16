@@ -8,8 +8,8 @@
       :class="isMenuOpen ? 'dark:bg-dark-mode-light bg-gray-100 z-50 block' : 'z--50'"
     >
       <div
-        class="absolute top-0 -right-32 opacity-0 w-5/6 sm:w-1/2 lg:w-1/3 xl:w-1/4 dark:bg-dark-mode bg-white h-screen shadow-xl dark:border-gray-700 border-l transition duration-300 ease-out transform "
-        :class="isMenuOpen ? 'z-50 -translate-x-32rem opacity-100' : '-translate-x-0'"
+        class="absolute top-0 -left-32 opacity-0 w-5/6 sm:w-1/2 lg:w-1/3 xl:w-1/4 dark:bg-dark-mode bg-white h-screen shadow-xl dark:border-gray-700 border-l transition duration-300 ease-out transform "
+        :class="isMenuOpen ? 'z-50 translate-x-32rem opacity-100' : 'translate-x-0'"
       >
         <div class="z-50 absolute top-0 right-0 pr-5 pt-5 smw-close-button">
           <div class="inner">
@@ -24,8 +24,12 @@
         </div>
         <!-- smw close button end -->
 
+          <div class="here p-5 absolute w-full  mt-12">
+            <SearchRecipes mobile="true" />
+          </div>
+
         <div class="navbar-wrapper h-screen flex items-center justify-center">
-          <ul class="text-lg xxl:text-xl capitalize text-gray-800 dark:text-gray-400 text-right">
+          <ul class="text-lg xxl:text-xl capitalize text-gray-800 dark:text-gray-400">
             <li class="mb-2">
               <nuxt-link
                 to="/recipes"
@@ -45,13 +49,20 @@
               <a
                 href="contact.html"
                 class="hover:text-theme-orange transition duration-300"
-              >Contact.</a>
+              >Contact</a>
+            </li>
+
+            <li class="mb-2">
+              <nuxt-link
+                to="/login"
+                class="hover:text-theme-orange transition duration-300"
+              >login</nuxt-link>
             </li>
 
             <li class="divider w-full bg-gray-300 dark:bg-gray-700 h-1 mt-12 mb-5"></li>
 
             <li class="socia-links">
-              <ul class="flex items-center justify-end">
+              <ul class="flex items-center justify-start">
                 <li class="mx-2">
                   <a href>
                     <svg
@@ -111,9 +122,13 @@
 </template>
 
 <script>
+
+import SearchRecipes from "../search/SearchRecipes.vue"
+
 export default {
   components :{
-      Keypress: () => import('vue-keypress')
+      Keypress: () => import('vue-keypress'),
+      SearchRecipes
   },
   data() {
     return {

@@ -1,24 +1,24 @@
 <template>
   <div>
-    <section class="single-recipe-section mt-12 px-5 lg:px-0">
-      <div class="container mx-auto">
+    <section class="single-recipe-section px-5 lg:px-0">
+      <div class="max-w-6xl xxl:max-w-screen-xl mx-auto">
         <div class="recipe-wrapper">
           <div class="recipe-hero-header">
-            <div class="flex">
-              <div class="w-1/2 flex items-center">
+            <div class="flex flex-wrap">
+              <div class="w-full md:w-1/2 md:flex md:items-center mb-6 md:mb-0">
                 <div class="recipe-header-info pr-0 lg:pr-16">
-                  <div class="recipe-type hidden">
-                    <a
+                  <div class="recipe-type font-semibold text-sm text-gray-600 tracking-wide">
+                    by
+                    <nuxt-link :to="`/${recipe.author.username}`"
                       href="#"
-                      class="inline-block border px-3 py-1 font-semibold tracking-wide text-sm bg-gray-200 text-gray-900 rounded-full"
+                      class="inline-block hover:text-orange-600"
                     >
-                      Side
-                      Dishes
-                    </a>
+                      {{recipe.author.name}}
+                    </nuxt-link>
                   </div>
                   <!-- recipe type end -->
 
-                  <div class="recipe-title my-5">
+                  <div class="recipe-title my-5 mt-4">
                     <h1
                       class="text-3xl font-semibold capitalize text-gray-800 dark:text-gray-200 leading-tight"
                     >{{recipe.title}}</h1>
@@ -86,7 +86,7 @@
                 <!-- recipe header info end -->
               </div>
 
-              <div class="w-1/2 h-32rem relative">
+              <div class="w-full md:w-1/2 h-32rem relative">
                 <div class="play-button absolute bottom-0 left-0 z-10 p-3" v-if="recipe.video">
                   <a
                     id="play-video"
@@ -117,14 +117,14 @@
           </div>
           <!-- recipe hero header end-->
 
-          <div class="prep-ingredients-wrapper mt-24">
-            <div class="flex">
-              <div class="w-3/4">
+          <div class="prep-ingredients-wrapper mt-12 md:mt-24">
+            <div class="flex flex-wrap lg:flex-no-wrap">
+              <div class="w-full lg:w-3/4 mb-6 lg:mb-0">
                 <div class="preparation-contanier">
                   <div class="inner">
                     <div class="prep-header">
                       <h2
-                        class="text-3xl capitalize text-gray-800 dark:text-gray-200 leading-none"
+                        class="capitalize text-2xl text-gray-900 dark:text-gray-300 leading-none"
                       >Preparation</h2>
                     </div>
                     <!-- prep header -->
@@ -135,7 +135,7 @@
                 <!-- preparation-contanier end -->
               </div>
 
-              <div class="w-1/3">
+              <div class="w-full lg:w-1/3">
                 <RecipeIngredient :recipe="recipe" />
               </div>
             </div>

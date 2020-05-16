@@ -1,28 +1,36 @@
 <template>
   <div>
-    <section class="categories-section mt-8 lg:mt-12 py-6">
-      <div class="container mx-auto px-5 lg:px-0">
+    <section class="categories-section lg:mt-5 py-6">
+      <div class="max-w-6xl xxl:max-w-screen-xl mx-auto px-5 lg:px-0">
         <div class="section-header mb-5">
-          <h1 class="capitalize text-2xl text-gray-800">Browse Recipe by Category</h1>
+          <h1 class="capitalize text-xl font-medium text-gray-900 dark:text-gray-300">Browse Recipe by Category</h1>
         </div>
         <!-- section header end -->
 
-        <client-only>
-          <swiper class="swiper" :options="swiperOption">
-            <swiper-slide v-for="(category, i) in categories" :key="i">
+        <template v-if="$apollo.queries.GetFeaturedCategoriesRandomly.loading">
+          <ContentLoader height="h-25rem" gap="3" numbers="5" grid="5" />
+        </template>
+
+        <div v-else v-swiper:mySwiper="swiperOption" ref="mySwiper" class="swiper">
+          <div class="swiper-wrapper relative">
+            <div
+              class="swiper-slide"
+              v-for="(category, i) in GetFeaturedCategoriesRandomly"
+              :key="i"
+            >
               <SingleCategory :category="category" />
-            </swiper-slide>
-          </swiper>
-        </client-only>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- container end -->
     </section>
     <!-- cotegories section end -->
 
     <section class="recipes-section mt-12 px-5 lg:px-0">
-      <div class="container mx-auto">
+      <div class="max-w-6xl xxl:max-w-screen-xl mx-auto">
         <div class="section-header mb-3 lg:mb-5">
-          <h1 class="capitalize text-2xl text-gray-800">
+          <h1 class="capitalize text-xl font-medium text-gray-900 dark:text-gray-300">
             Just For you
             <span class="tracking-widest">...</span>
           </h1>
@@ -34,13 +42,24 @@
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-wrapper"
           >
             <div
-              class="pb-10 relative recipe-item border dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out "
+              class="pb-10 relative recipe-item border dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out"
               v-for="(recipe, i) in recipes"
               :key="i"
             >
               <SingleRecipe :recipe="recipe" />
             </div>
             <!-- recipe item end -->
+
+            <nuxt-link to="/recipes"
+              class="pb-10 relative recipe-item border dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out flex items-center justify-center text-4xl uppercase text-center font-thin tracking-wider text-gray-600 bg-gray-100 py-10 md:py-0"
+            >
+            Explore
+             <br>
+             All
+             <br>
+             Recipes
+            </nuxt-link>
+            <!-- explore grid item -->
           </div>
           <!-- flex end -->
         </div>
@@ -49,10 +68,6 @@
       <!-- container end -->
     </section>
 
-    <section class="laod-more-section text-center my-16 md:my-16">
-        <nuxt-link to="recipes" class="w-64 focus:outline-none dark:border-gray-700 border cursor-pointer flex items-center mx-auto uppercase px-2 py-4 justify-center pb-3 transition cursor-pointer duration-300 hover:shadow rounded-lg text-gray-700 dark:text-gray-400 tracking-wide dark:hover:bg-dark-mode-light">Explore All Recipes</nuxt-link>
-    </section>
-    <!-- load more section end -->
   </div>
 </template>
 
@@ -65,22 +80,34 @@ import RecipesQuery from "~/gql/queries/recipes";
 
 import SingleRecipe from "~/components/recipes/SingleRecipe.vue";
 import SingleCategory from "~/components/category/SingleCategory.vue";
+import ContentLoader from "~/components/templates/ContentLoader";
 
 export default {
   components: {
     SingleCategory,
-    SingleRecipe
+    SingleRecipe,
+    ContentLoader
   },
   data() {
     return {
       isMenuOpen: false,
       swiperOption: {
-        slidesPerView: 6,
+        slidesPerView: 5,
         spaceBetween: 12,
         freeMode: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
+        breakpoints: {
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 12
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 12
+          },
+          480: {
+            slidesPerView: 1,
+            spaceBetween: 12
+          }
         }
       }
     };
@@ -88,11 +115,11 @@ export default {
   async asyncData({ app }) {
     const client = app.apolloProvider.defaultClient;
 
-    const categories = await client
-      .query({
-        query: GetFeaturedCategoriesRandomlyQuery
-      })
-      .then(({ data }) => data && data.GetFeaturedCategoriesRandomly);
+    // const categories = await client
+    //   .query({
+    //     query: GetFeaturedCategoriesRandomlyQuery
+    //   })
+    //   .then(({ data }) => data && data.GetFeaturedCategoriesRandomly);
 
     const recipes = await client
       .query({
@@ -101,9 +128,15 @@ export default {
       .then(({ data }) => data && data.recipes.data);
 
     return {
-      categories,
       recipes
     };
+  },
+  apollo: {
+    GetFeaturedCategoriesRandomly() {
+      return {
+        query: GetFeaturedCategoriesRandomlyQuery
+      };
+    }
   }
 };
 </script>

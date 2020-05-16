@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="category-item swiper-slide bg-gray-100 overflow-hidden h-25rem rounded-lg cursor-pointer transition duration-500 ease-in-out transform sm:hover:scale-110 sf-z-12-hover hover:shadow-xl"
+      class="category-item swiper-slide bg-gray-100 overflow-hidden h-25rem rounded-lg cursor-pointer transition duration-500 ease-in-out transform sm:hover:scale-105 sf-z-12-hover hover:shadow-xl"
     >
       <div class="inner relative">
         <!-- <span class="text-white absolute w-full h-full left-0 top-0">
@@ -21,12 +21,12 @@
             class="category-item-info absolute bottom-0 left-0 w-full h-full text-white transition duration-500"
           >
             <div class="inner absolute bottom-0 left w-full p-3">
-              <h2 class="cii-title opacity-100 text-2xl dark:text-gray-300 leading-tight mb-2">{{category.title}}</h2>
+              <h2 class="cii-title opacity-100 text-xl dark:text-gray-300 leading-tight mb-2">{{category.title}}</h2>
 
               <div class="flex items-center">
                 <div class="w-full">
                   <p
-                    class="cii-title tracking-widest opacity-100 dark:text-gray-300 text-base tracking-wide"
+                    class="cii-title tracking-widest opacity-100 dark:text-gray-300 text-sm tracking-wide"
                   >{{category.recipes.length}} Recipes</p>
                 </div>
                 <div class="w-auto">

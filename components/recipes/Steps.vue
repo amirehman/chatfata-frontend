@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="prep-list pr-32 mt-3">
+    <div class="prep-list md:pr-32 mt-3">
       <ol>
         <li
           v-for="(step, i) in steps"

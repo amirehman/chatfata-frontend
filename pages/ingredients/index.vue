@@ -1,11 +1,13 @@
 <template>
-  <section class="ingredients-section mt-8 lg:mt-12 px-5 lg:px-0">
-    <div class="container mx-auto">
+  <section class="ingredients-section lg:mt-5 px-5 lg:px-0">
+    <div class="max-w-6xl xxl:max-w-screen-xl mx-auto">
       <div class="section-header mb-3 lg:mb-6">
         <div class="flex items-center">
           <div class="w-full">
-            <h1 class="text-3xl text-gray-800">Browse by ingredients</h1>
-            <div class="w-auto text-base xxl:text-lg mt-2 text-gray-800">
+            <h1
+              class="capitalize text-2xl text-gray-900 dark:text-gray-300"
+            >Browse recipe by ingredients</h1>
+            <div class="w-auto text-base xxl:text-lg mt-2 text-gray-800 dark:text-gray-400">
               <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit numquam culpa
                 repellat similique eligendi temporibus corrupti officiis vitae sunt nesciunt odit,
@@ -16,7 +18,7 @@
               <input
                 type="search"
                 v-model="search"
-                class="border focus:outline-none border-gray-400 p-2 transition duration-300 ease-in-out tracking-wider rounded hover:border-gray-500 w-25rem"
+                class="dark:bg-dark-mode dark:border-gray-700 dark:hover:border-gray-700 dark:focus:bg-dark-mode-light border focus:outline-none border-gray-400 p-2 transition duration-300 ease-in-out tracking-wider rounded hover:border-gray-500 w-25rem"
                 placeholder="Search ingredients"
               />
             </div>
@@ -26,26 +28,24 @@
       </div>
       <!-- section header end  -->
 
+      <!-- {{groupedIngrediets}} -->
       <div>
         <ul>
           <li class="ingred-alpha" v-for="(ingredient, i) in groupedIngrediets" :key="i">
-            <span class="text-3xl uppercase text-gray-700 mb-3 mt-8 block">{{i}}</span>
-            <ul
-              class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 xxl:grid-cols-8 gap-4"
-            >
-              <li
+          <span class="text-3xl uppercase text-gray-800 dark:text-gray-400 mb-3 mt-8 block">{{i}}</span>
+          <ul class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+            <li
                 v-for="(ingred, key) in ingredient"
                 :key="key"
-                class="ingred-name grid-item border overflow-hidden transition duration-300 ease-out hover:border-gray-400"
+                class="ingred-name grid-item overflow-hidden transition duration-300 ease-out"
               >
                 <nuxt-link
-                  :to="`/ingredients/${ingred.slug}`"
+                  :to="`/ingredients/${ingred.ingredient.slug}`"
                   href
-                  class="text-base xxl:text-lg text-center p-1 text-gray-800 block"
-                >{{ingred.title}}</nuxt-link>
-              </li>
-            </ul>
-            <!-- grid item end -->
+                  class="text-base text-center text-gray-800 dark:text-gray-400 block dark:focus:text-orange-500 focus:text-orange-500 hover:text-orange-500"
+                >{{ingred.ingredient.title}}</nuxt-link>
+            </li>
+          </ul>
           </li>
           <!-- ingred alpha end -->
         </ul>
@@ -78,17 +78,28 @@ export default {
   computed: {
     groupedIngrediets() {
       if (this.search === "") {
-        return _.groupBy(this.ingredients, item => {
-          return item.title.charAt(0);
+        let uniqueArr = _.uniqBy(this.ingredients, function(e) {
+          return e.ingredient.id;
         });
+
+        return _.groupBy(uniqueArr, item => {
+          return item.ingredient.title.charAt(0);
+        });
+
       } else {
-        let ingredients = this.ingredients.filter(entry => {
-          return entry.title.toLowerCase().includes(this.search.toLowerCase());
+
+        let uniqueArr = _.uniqBy(this.ingredients, function(e) {
+          return e.ingredient.id;
+        });
+
+        let ingredients = uniqueArr.filter(entry => {
+          return entry.ingredient.title.toLowerCase().includes(this.search.toLowerCase());
         });
 
         return _.groupBy(ingredients, item => {
-          return item.title.charAt(0);
+          return item.ingredient.title.charAt(0);
         });
+
       }
     }
   },

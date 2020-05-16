@@ -1,12 +1,12 @@
 <template>
   <div>
     <div
-      class="ingredients-contanier dark:border-gray-700 border py-5 pb-3 rounded-lg hover:shadow-xl trasition ease-in-out duration-300 transform hover:scale-125"
+      class="ingredients-contanier dark:border-gray-700 border py-5 pb-3 rounded-lg hover:shadow-xl trasition ease-in-out duration-300 transform md:hover:scale-125"
     >
       <div class="inner">
         <div class="ingredients-header mb-4 px-5">
           <h2
-            class="text-xl xxl:2xl capitalize text-gray-800 dark:text-gray-200 tracking-wider leading-none"
+            class="capitalize text-2xl text-gray-900 dark:text-gray-300 leading-none"
           >ingredients</h2>
         </div>
 

@@ -1,7 +1,9 @@
 query {
-  GetAllIngredientsSorted {
-    id
-    title
-    slug
+	GetAllIngredientsSorted {
+    ingredient {
+      id
+      title
+      slug
+    }
   }
 }
