@@ -68,7 +68,8 @@ export default {
         errorHandler: '~/plugins/apollo-error-handler.js',
         clientConfigs: {
             default: {
-                httpEndpoint: "http://127.0.0.1:8000/graphql",
+                // httpEndpoint: "http://127.0.0.1:8000/graphql",
+                httpEndpoint: "https://manage.chatfata.com/graphql",
                 wsEndpoint: null,
             }
         }

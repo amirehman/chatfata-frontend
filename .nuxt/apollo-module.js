@@ -28,7 +28,7 @@ export default (ctx, inject) => {
       let defaultClientConfig
 
         defaultClientConfig = {
-  "httpEndpoint": "http://127.0.0.1:8000/graphql",
+  "httpEndpoint": "https://manage.chatfata.com/graphql",
   "wsEndpoint": null
 }
 
