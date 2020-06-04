@@ -1,7 +1,7 @@
 <template>
   <div>
     <header
-      class="main-header max-w-6xl xxl:max-w-screen-xl mx-auto px-5 lg:px-0 py-3 md:p-5 md:py-6 relative pb-0 mb-8"
+      class="main-header max-w-6xl xxl:max-w-screen-xl mx-auto px-5 py-3 md:p-5 md:py-6 relative pb-0 mb-8"
     >
       <div class="flex justify-between lg:flex-no-wrap items-center">
         <div class="w-16 md:w-24 logo">

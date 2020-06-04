@@ -3,13 +3,19 @@
     <section class="categories-section lg:mt-5 py-6">
       <div class="max-w-6xl xxl:max-w-screen-xl mx-auto px-5 lg:px-0">
         <div class="section-header mb-5">
-          <h1 class="capitalize text-2xl text-gray-900 dark:text-gray-300">Browse Recipe by Category</h1>
+          <h1 class="capitalize text-2xl text-gray-900 dark:text-gray-300">
+            Browse Recipe by Category
+          </h1>
         </div>
         <!-- section header end -->
 
         <div v-swiper:mySwiper="swiperOption" ref="mySwiper" class="swiper">
           <div class="swiper-wrapper relative">
-            <div class="swiper-slide" v-for="(category, i) in categories" :key="i">
+            <div
+              class="swiper-slide"
+              v-for="(category, i) in categories"
+              :key="i"
+            >
               <SingleCategory :category="category" />
             </div>
           </div>
@@ -49,13 +55,19 @@
       <!-- container end -->
     </section>
 
-    <section class="laod-more-section text-center my-16 md:my-16" v-if="recipes.length > 20">
-        <nuxt-link to="recipes" class="w-1/6 focus:outline-none border text-xl cursor-pointer flex items-center mx-auto uppercase px-2 py-4 justify-center pb-3 transition cursor-pointer duration-300 hover:border-gray-400 rounded-lg font-semibold text-gray-700 tracking-wide">Load More</nuxt-link>
+    <section
+      class="laod-more-section text-center my-16 md:my-16"
+      v-if="recipes.length > 20"
+    >
+      <nuxt-link
+        to="recipes"
+        class="w-1/6 focus:outline-none border text-xl cursor-pointer flex items-center mx-auto uppercase px-2 py-4 justify-center pb-3 transition cursor-pointer duration-300 hover:border-gray-400 rounded-lg font-semibold text-gray-700 tracking-wide"
+        >Load More</nuxt-link
+      >
     </section>
     <!-- load more section end -->
   </div>
 </template>
-
 
 <script>
 import gql from "graphql-tag";
@@ -67,6 +79,9 @@ import SingleRecipe from "~/components/recipes/SingleRecipe.vue";
 import SingleCategory from "~/components/category/SingleCategory.vue";
 
 export default {
+  head: {
+    title: "Explore recipes | Chatfata.com",
+  },
   components: {
     SingleCategory,
     SingleRecipe
@@ -85,11 +100,11 @@ export default {
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 12,
+            spaceBetween: 12
           },
           480: {
             slidesPerView: 1,
-            spaceBetween: 12,
+            spaceBetween: 12
           }
         }
       }

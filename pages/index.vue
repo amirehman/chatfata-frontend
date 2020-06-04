@@ -51,7 +51,7 @@
             <!-- recipe item end -->
 
             <nuxt-link to="/recipes"
-              class="pb-10 relative recipe-item border dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out flex items-center justify-center text-4xl uppercase text-center font-thin tracking-wider text-gray-600 bg-gray-100 py-10 md:py-0"
+              class="pb-10 relative recipe-item border dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out flex items-center justify-center text-4xl uppercase text-center font-thin tracking-wider text-gray-600 dark:text-gray-500 bg-gray-100 dark:bg-dark-mode-light py-10 md:py-0"
             >
             Explore
              <br>

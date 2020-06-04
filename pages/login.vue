@@ -33,19 +33,14 @@
             <button
               class="mt-5 border dark:bg-dark-mode dark:border-gray-700 focus:outline-none dark:focus:bg-dark-mode-light dark:focus:border-gray-700 dark:hover:bg-dark-mode-light focus:border-gray-500 rounded px-5 py-2 hover:bg-gray-200 pb-1"
               type="submit"
-            >Submit</button>
+            >
+              Submit
+            </button>
           </form>
-          <div v-else>
-            You are logged in! go to
-            <nuxt-link to="/shallowfry/edit">edit your profile</nuxt-link>
-            <button
-              class="mt-5 border dark:bg-dark-mode dark:border-gray-700 focus:outline-none dark:focus:bg-dark-mode-light dark:focus:border-gray-700 dark:hover:bg-dark-mode-light focus:border-gray-500 rounded px-5 py-2 hover:bg-gray-200 pb-1"
-              type="button"
-              @click="onLogout"
-            >Logout</button>
+          <div class="text-red-600 mt-5 border border-red-500 p-3 inline-block w-auto rounded bg-red-100" v-if="error">
+            User credentials are wrong! <br />
+            please try again with a correct email and password.
           </div>
-
-          <div style="color: red;" v-if="error">{{error}}</div>
         </div>
       </div>
       <!-- container end -->
@@ -54,13 +49,12 @@
   </div>
 </template>
 
-
 <script>
 import authenticateUserGql from "~/gql/mutations/authenticateUser.gql";
 import GetUserQuery from "~/gql/queries/me.gql";
 
 export default {
-  middleware: ['isNotAuth'],
+  middleware: ["isNotAuth"],
   head() {
     return {
       title: "Login | Chatfata.com"
@@ -69,21 +63,22 @@ export default {
   data() {
     return {
       submitting: false,
-      error: null,
       credentials: {
         username: "info@shallowfry.com",
         password: "Letme@in"
-      },
-      // successfulData: null
+      }
     };
   },
   computed: {
-    isAuthenticated () {
-      return this.$store.getters['user/isAuthenticated']
+    error() {
+      return this.$store.state.user.error;
     },
-    user () {
-      return this.$store.state.user.loggedInUser
+    isAuthenticated() {
+      return this.$store.getters["user/isAuthenticated"];
     },
+    user() {
+      return this.$store.state.user.loggedInUser;
+    }
   },
   methods: {
     async getUser() {
@@ -93,17 +88,20 @@ export default {
       return this.$store.commit("user/mutateLogedInUser", user.data.me);
     },
     onSubmit() {
-      this.submitting = true
-      this.$store.dispatch('user/retrieveToken', {
-        username: this.credentials.username,
-        password: this.credentials.password
-      })
-      .then(response =>  {
-       this.$store.dispatch('user/getUser')
-      })
+      this.submitting = true;
+      this.$store
+        .dispatch("user/retrieveToken", {
+          username: this.credentials.username,
+          password: this.credentials.password
+        })
+        .then(response => {
+          this.$store.dispatch("user/getUser");
+        })
+        this.submitting = false
+
     },
     onLogout() {
-      this.$store.dispatch('user/removeToken');
+      this.$store.dispatch("user/removeToken");
     }
   }
 };

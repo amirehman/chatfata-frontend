@@ -14,9 +14,19 @@ import { createStore } from './store.js'
 
 import nuxt_plugin_workbox_794c7b2f from 'nuxt_plugin_workbox_794c7b2f' // Source: ./workbox.js (mode: 'client')
 import nuxt_plugin_nuxticons_fcfbf356 from 'nuxt_plugin_nuxticons_fcfbf356' // Source: ./nuxt-icons.js (mode: 'all')
+import nuxt_plugin_srcplugin2a16b417_ab0764e8 from 'nuxt_plugin_srcplugin2a16b417_ab0764e8' // Source: ./src.plugin.2a16b417.js (mode: 'client')
+import nuxt_plugin_nuxtvueselect_665fb53c from 'nuxt_plugin_nuxtvueselect_665fb53c' // Source: ./nuxt-vue-select.js (mode: 'client')
 import nuxt_plugin_apollomodule_4d8e90c2 from 'nuxt_plugin_apollomodule_4d8e90c2' // Source: ./apollo-module.js (mode: 'all')
+import nuxt_plugin_axios_8647225a from 'nuxt_plugin_axios_8647225a' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_vueawesomeswiper_4af85e3f from 'nuxt_plugin_vueawesomeswiper_4af85e3f' // Source: ../plugins/vue-awesome-swiper (mode: 'client')
 import nuxt_plugin_vlazyimage_2c5129ef from 'nuxt_plugin_vlazyimage_2c5129ef' // Source: ../plugins/v-lazy-image (mode: 'client')
+import nuxt_plugin_vueclickaway_ccb3558e from 'nuxt_plugin_vueclickaway_ccb3558e' // Source: ../plugins/vue-clickaway (mode: 'client')
+import nuxt_plugin_vuewysiwyg_35b20b90 from 'nuxt_plugin_vuewysiwyg_35b20b90' // Source: ../plugins/vue-wysiwyg (mode: 'client')
+import nuxt_plugin_vueeditor_3c5040ec from 'nuxt_plugin_vueeditor_3c5040ec' // Source: ../plugins/vue-editor (mode: 'client')
+import nuxt_plugin_vuecroppa_4193bac4 from 'nuxt_plugin_vuecroppa_4193bac4' // Source: ../plugins/vue-croppa (mode: 'client')
+import nuxt_plugin_vuelaravelerrors_370eee1c from 'nuxt_plugin_vuelaravelerrors_370eee1c' // Source: ../plugins/vue-laravel-errors (mode: 'client')
+import nuxt_plugin_vuefilepond_400a1a4e from 'nuxt_plugin_vuefilepond_400a1a4e' // Source: ../plugins/vue-filepond (mode: 'client')
+import nuxt_plugin_vuetoastify_19c1a652 from 'nuxt_plugin_vuetoastify_19c1a652' // Source: ../plugins/vue-toastify (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -63,7 +73,7 @@ async function createApp (ssrContext) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"shallowfry","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"My majestic Nuxt.js project"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"shallowfry"},{"hid":"author","name":"author","content":"getidea.net"},{"hid":"theme-color","name":"theme-color","content":"#e67e22"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"shallowfry"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"shallowfry"},{"hid":"og:description","name":"og:description","property":"og:description","content":"My majestic Nuxt.js project"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.94078387.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64.b86080.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512.b86080.png","sizes":"512x512"}],"script":[{"src":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fgh\u002Falpinejs\u002Falpine@v2.x.x\u002Fdist\u002Falpine.min.js"}],"style":[],"htmlAttrs":{"lang":"en"}},
+    head: {"title":"Pick Your Recipe | Chatfata.com","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"title","name":"title","content":"Pick Your Recipe | Chatfata.com"},{"hid":"description","name":"description","content":"Inspire your love one with our daily recipes, tips."},{"hid":"keywords","name":"keywords","content":"free recipes, easy recipes, indian recipes, pakistani recipes, step by step recipes, lunch recipes, dinner recies, breakfast recipes"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"chatfata"},{"hid":"author","name":"author","content":"chatfata.com"},{"hid":"theme-color","name":"theme-color","content":"#e67e22"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"chatfata"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"chatfata"},{"hid":"og:description","name":"og:description","property":"og:description","content":"Inspire your love one with our daily recipes, tips."}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Fcdn.bootcss.com\u002Ffont-awesome\u002F4.7.0\u002Fcss\u002Ffont-awesome.css"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Fvue-select\u002F3.4.0\u002Fvue-select.css"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.eddb2a8a.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64.99190b.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512.99190b.png","sizes":"512x512"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
 
     store,
     router,
@@ -186,8 +196,20 @@ async function createApp (ssrContext) {
     await nuxt_plugin_nuxticons_fcfbf356(app.context, inject)
   }
 
+  if (process.client && typeof nuxt_plugin_srcplugin2a16b417_ab0764e8 === 'function') {
+    await nuxt_plugin_srcplugin2a16b417_ab0764e8(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_nuxtvueselect_665fb53c === 'function') {
+    await nuxt_plugin_nuxtvueselect_665fb53c(app.context, inject)
+  }
+
   if (typeof nuxt_plugin_apollomodule_4d8e90c2 === 'function') {
     await nuxt_plugin_apollomodule_4d8e90c2(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_axios_8647225a === 'function') {
+    await nuxt_plugin_axios_8647225a(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vueawesomeswiper_4af85e3f === 'function') {
@@ -196,6 +218,34 @@ async function createApp (ssrContext) {
 
   if (process.client && typeof nuxt_plugin_vlazyimage_2c5129ef === 'function') {
     await nuxt_plugin_vlazyimage_2c5129ef(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vueclickaway_ccb3558e === 'function') {
+    await nuxt_plugin_vueclickaway_ccb3558e(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuewysiwyg_35b20b90 === 'function') {
+    await nuxt_plugin_vuewysiwyg_35b20b90(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vueeditor_3c5040ec === 'function') {
+    await nuxt_plugin_vueeditor_3c5040ec(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuecroppa_4193bac4 === 'function') {
+    await nuxt_plugin_vuecroppa_4193bac4(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuelaravelerrors_370eee1c === 'function') {
+    await nuxt_plugin_vuelaravelerrors_370eee1c(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuefilepond_400a1a4e === 'function') {
+    await nuxt_plugin_vuefilepond_400a1a4e(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuetoastify_19c1a652 === 'function') {
+    await nuxt_plugin_vuetoastify_19c1a652(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first

@@ -1,12 +1,11 @@
 export const state = () => ({
-    // storageUrl: "http://127.0.0.1:8000/storage/",
-    // baseUrl: "http://localhost:3000",
-    storageUrl: "https://manage.chatfata.com/storage/",
-    baseUrl: "https://chatfata.com",
+    storageUrl: process.env.STORAGE_URL,
+    baseUrl: process.env.BASE_URL,
+    serverUrl: process.env.SERVER_URL,
     sideNav: false,
-    theme: 'dark-mode',
-    searchMode: false
-
+    theme: "dark-mode",
+    searchMode: false,
+    wiki: null
 });
 
 export const mutations = {
@@ -19,8 +18,22 @@ export const mutations = {
     mutateSearchMode: function(state, payload) {
         state.searchMode = payload;
     },
+    mutateWiki: function(state, payload) {
+        state.wiki = payload;
+    }
 };
 
 export const actions = {
-
+    async getWiki(context, payload) {
+        try {
+            const res = await fetch(
+                `https://en.wikipedia.org/api/rest_v1/page/summary/${payload}`
+            );
+            const data = await res.json();
+            context.commit("mutateWiki", data);
+        } catch (e) {
+            // console.error(e);
+            // this.error = e;
+        }
+    }
 };

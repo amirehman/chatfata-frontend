@@ -1,5 +1,5 @@
 query {
-  recipes {
+  recipes (status: "PUBLISHED") {
     data {
       id
       title
@@ -7,6 +7,7 @@ query {
       image
       difficulty
       prep_time
+      status
       author {
         id
         name

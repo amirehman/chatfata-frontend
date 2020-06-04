@@ -4,7 +4,9 @@ import getUserQuery from "~/gql/queries/me.gql";
 export const state = () => ({
     loggedInUser: null,
     token: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    editingMode: false,
+    error: null
 });
 
 export const getters = {
@@ -24,6 +26,12 @@ export const getters = {
     }
 };
 export const mutations = {
+    error: function(state, payload) {
+        state.error = payload;
+    },
+    editingMode: function(state, payload) {
+        state.editingMode = payload;
+    },
     loggedInUser: function(state, payload) {
         state.loggedInUser = payload;
     },
@@ -58,8 +66,8 @@ export const actions = {
             context.commit("receiveToken", res.access_token);
             this.$router.push(`/${res.user.username}`);
         } catch (e) {
-            console.error(e);
-            // this.error = e;
+            console.log(e);
+            context.commit("error", e);
         }
     },
     async removeToken(context, payload) {
@@ -67,7 +75,9 @@ export const actions = {
         context.commit("isAuthenticated", false);
         context.commit("removeToken", null);
         context.commit("loggedInUser", null);
-        this.$router.push(`/login`);
+        context.commit("editingMode", false);
+        context.commit("error", null);
+        this.$router.push(`/`);
     },
     async getUser(context, payload) {
         let client = this.app.apolloProvider.defaultClient;

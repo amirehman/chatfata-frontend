@@ -3,7 +3,7 @@
     <section class="page-section lg:mt-5 py-6">
       <div class="max-w-6xl xxl:max-w-screen-xl mx-auto px-5 lg:px-0">
         <div class="section-header mb-5">
-          <h1 class="text-3xl text-gray-800">
+          <h1 class="text-2xl text-gray-900">
             <span class="text-gray-800 dark:text-gray-200">About</span>
             <span>Shallow Fry</span>
           </h1>
@@ -23,4 +23,10 @@
   </div>
 </template>
 
-
+<script>
+export default {
+  head: {
+    title: "About Chatfata"
+  },
+}
+</script>

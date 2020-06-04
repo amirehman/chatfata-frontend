@@ -65,11 +65,9 @@
 </template>
 
 <script>
-import { mixin as clickaway } from "vue-clickaway";
 
 export default {
   props: ['user'],
-   mixins: [clickaway],
   components: {
     Keypress: () => import("vue-keypress")
   },

@@ -1,0 +1,7 @@
+query{
+	meals {
+    id
+    title
+    slug
+  }
+}

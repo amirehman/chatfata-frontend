@@ -2,10 +2,15 @@ query($username: ID!) {
   userbyname(username: $username) {
     id
     name
+    username
     avatar
     info {
       id
       about
+    }
+    roles {
+      id
+      name
     }
     social {
       id
@@ -23,6 +28,7 @@ query($username: ID!) {
       image
       difficulty
       prep_time
+      status
       author {
         id
         name

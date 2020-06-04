@@ -1,0 +1,8 @@
+query($slug: ID!) {
+  isRecipePublished(slug: $slug) {
+    status
+    author {
+      id
+    }
+  }
+}

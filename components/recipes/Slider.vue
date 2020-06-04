@@ -19,7 +19,7 @@
             </span>
           </div>
           <div class="p-5 text-2xl dark:font-light leading-snug overflow-y-auto">
-            <p>{{currentSlide}}</p>
+            <p v-html="currentSlide"></p>
           </div>
           <div class="footer border-t border-gray-400">
             <div class="arrows text-gray-700 w-full flex items-center justify-between">

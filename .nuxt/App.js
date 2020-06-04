@@ -9,12 +9,23 @@ import {
 } from './utils'
 
 import NuxtLoading from './components/nuxt-loading.vue'
+import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import '../assets/css/tailwind.css'
 
+import '../node_modules/vue-wysiwyg/dist/vueWysiwyg.css'
+
+import '../node_modules/vue-croppa/dist/vue-croppa.css'
+
+import '../node_modules/filepond/dist/filepond.min.css'
+
 import '../node_modules/swiper/css/swiper.min.css'
 
+import '../assets/css/loader.scss'
+
 import '../assets/css/custom.scss'
+
+import '../node_modules/vue-select/dist/vue-select.css'
 
 import _6f6c098b from '../layouts/default.vue'
 
@@ -53,7 +64,7 @@ export default {
       }
     }, [
       loadingEl,
-
+      h(NuxtBuildIndicator),
       transitionEl
     ])
   },
@@ -178,6 +189,10 @@ export default {
     },
 
     setLayout (layout) {
+      if(layout && typeof layout !== 'string') {
+        throw new Error('[nuxt] Avoid using non-string value as layout property.')
+      }
+
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }

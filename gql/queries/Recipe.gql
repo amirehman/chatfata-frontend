@@ -1,4 +1,4 @@
-query ($slug: ID!) {
+query($slug: ID!) {
   recipe(slug: $slug) {
     id
     title
@@ -8,6 +8,7 @@ query ($slug: ID!) {
     image
     video
     ingredient_note
+    status
     body
     meals {
       id
@@ -17,6 +18,24 @@ query ($slug: ID!) {
       id
       name
       username
+      avatar
+      info {
+        id
+        about
+      }
+      roles {
+        id
+        name
+      }
+      social {
+        id
+        link
+        media {
+          id
+          name
+          icon
+        }
+      }
     }
     categories {
       id
@@ -39,6 +58,10 @@ query ($slug: ID!) {
     notes {
       id
       body
+    }
+    images {
+      id
+      file
     }
   }
 }

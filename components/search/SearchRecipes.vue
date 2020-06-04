@@ -66,7 +66,6 @@
 
 
 <script>
-import { mixin as clickaway } from "vue-clickaway";
 
 import SearchRecipe from "./SearchRecipe";
 
@@ -75,7 +74,6 @@ import _ from "lodash";
 
 export default {
   props: ["mobile"],
-  mixins: [clickaway],
   components: {
     Keypress: () => import("vue-keypress"),
     SearchRecipe

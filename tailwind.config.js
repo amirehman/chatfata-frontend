@@ -2,8 +2,8 @@ module.exports = {
     theme: {
         extend: {
             screens: {
-                dark: { 'raw': '(prefers-color-scheme: dark)' },
-                light: { 'raw': '(prefers-color-scheme: light)' },
+                dark: { raw: "(prefers-color-scheme: dark)" },
+                light: { raw: "(prefers-color-scheme: light)" },
                 xxl: "1450px",
                 xxxl: "1650px"
             },
@@ -13,7 +13,7 @@ module.exports = {
                 "theme-red": "#c0392b",
                 "theme-red-dark": "#d9c10c",
                 "theme-orange": "#e67e22",
-                "dark-mode": "#2f3542",
+                "dark-mode": "#2f3542"
             },
             backgroundColor: theme => ({
                 "theme-yellow-dark": "#f9c22e",
@@ -23,8 +23,9 @@ module.exports = {
                 "white-trans-95": "rgba(255,255,255, 0.95)",
                 "black-trans-95": "rgba(0,0,0, 0.95)",
                 "dark-mode": "#2f3542",
+                "dark-mode-dark": "#29303d",
                 "dark-mode-light": "#353b48",
-                "dark-mode-light-1": "#484f5d",
+                "dark-mode-light-1": "#484f5d"
             }),
             spacing: {
                 "1.7rem": "1.7rem",
@@ -41,7 +42,8 @@ module.exports = {
                 "18rem": "18rem",
                 "24rem": "24rem",
                 "26rem": "26rem",
-                "screen-80": "80vh"
+                "screen-80": "80vh",
+                "400px": "400px"
             },
             opacity: {
                 "85": ".85",
@@ -58,6 +60,9 @@ module.exports = {
                 "-7": "-7rem",
                 "-16": "-16rem",
                 "-32": "-32rem"
+            },
+            minHeight: {
+                "10rem": "10rem"
             }
         },
         spinner: theme => ({
@@ -69,6 +74,8 @@ module.exports = {
             }
         })
     },
-    variants: {},
+    variants: {
+        appearance: ["group-hover"]
+    },
     plugins: [require("tailwindcss-spinner")()]
 };

@@ -27,7 +27,6 @@ export const mutations = {
         state.isPrevSlide = payload;
     },
     checkNextPrev: function(state, payload) {
-
         if (payload + 1 === state.sliderCount) {
             state.isNextSlide = false;
             state.isPrevSlide = true;
@@ -40,8 +39,6 @@ export const mutations = {
             state.isNextSlide = true;
             state.isPrevSlide = true;
         }
-        console.log(payload);
-
     }
 };
 

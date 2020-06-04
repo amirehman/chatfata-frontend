@@ -15,6 +15,8 @@ const _c09dc7c8 = () => interopDefault(import('../pages/recipes/_recipe.vue' /* 
 const _4e60092a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 const _4c87d324 = () => interopDefault(import('../pages/_profile/index.vue' /* webpackChunkName: "pages/_profile/index" */))
 const _089b5ba8 = () => interopDefault(import('../pages/_profile/edit.vue' /* webpackChunkName: "pages/_profile/edit" */))
+const _2534d03a = () => interopDefault(import('../pages/_profile/recipes/index.vue' /* webpackChunkName: "pages/_profile/recipes/index" */))
+const _73e53ed6 = () => interopDefault(import('../pages/_profile/recipes/_recipe.vue' /* webpackChunkName: "pages/_profile/recipes/_recipe" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -80,6 +82,14 @@ export const routerOptions = {
     path: "/:profile/edit",
     component: _089b5ba8,
     name: "profile-edit"
+  }, {
+    path: "/:profile/recipes",
+    component: _2534d03a,
+    name: "profile-recipes"
+  }, {
+    path: "/:profile/recipes/:recipe",
+    component: _73e53ed6,
+    name: "profile-recipes-recipe"
   }],
 
   fallback: false

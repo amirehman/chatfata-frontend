@@ -43,13 +43,13 @@
               </nuxt-link>
             </li>
             <li class="mb-2">
-              <a href="/about" class="hover:text-theme-orange transition duration-300">About.</a>
+              <nuxt-link to="/about" class="hover:text-theme-orange transition duration-300">About.</nuxt-link>
             </li>
             <li class="mb-2">
-              <a
-                href="contact.html"
+              <nuxt-link
+                to="/contact"
                 class="hover:text-theme-orange transition duration-300"
-              >Contact</a>
+              >Contact</nuxt-link>
             </li>
 
             <li class="mb-2">
