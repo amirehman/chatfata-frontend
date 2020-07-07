@@ -1,0 +1,6 @@
+query ($country_id: Int!) {
+  states(country_id: $country_id) {
+    id
+    name
+  }
+}

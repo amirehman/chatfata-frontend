@@ -15,7 +15,7 @@
               </div>
               <div
                 v-else
-                class="pb-10 relative recipe-item border dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out"
+                class="relative recipe-item border dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-xl transition duration-300 ease-in-out"
                 v-for="(recipe, i) in user.recipes"
                 :key="i"
               >
@@ -66,13 +66,16 @@
       </section>
     </div>
     <div v-else>
-      <div class="h-screen px-10 md:h-25rem w-full flex items-center justify-center">
+      <div
+        class="h-screen px-10 md:h-25rem w-full flex items-center justify-center"
+      >
         <div class="text-center">
           <span
             class="text-xl leading-none md:text-6xl font-light md:font-hairline text-gray-800 uppercase tracking-widest block"
             >page Not Found!</span
           >
-          <span class="text-xs md:mt-0 mt-1 md:text-xl font-light block text-gray-700"
+          <span
+            class="text-xs md:mt-0 mt-1 md:text-xl font-light block text-gray-700"
             >The page may deleted or private</span
           >
         </div>
@@ -86,7 +89,7 @@ import gql from "graphql-tag";
 
 import User from "~/gql/queries/Userbyname";
 
-import SingleRecipe from "~/components/recipes/SingleRecipe";
+import SingleRecipe from "~/components/profile/SingleRecipe";
 import ProfileHeader from "~/components/profile/ProfileHeader";
 
 export default {
@@ -115,6 +118,9 @@ export default {
     },
     isAuthenticated() {
       return this.$store.getters["user/isAuthenticated"];
+    },
+    isVerified() {
+      return this.$store.getters["user/isVerified"];
     },
     isChannel() {
       return this.$store.getters["user/isChannel"];

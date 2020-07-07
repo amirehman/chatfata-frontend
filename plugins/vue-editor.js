@@ -1,12 +1,15 @@
-import Vue from 'vue';
+import Vue from "vue";
 import wysiwyg from "vue-wysiwyg";
 Vue.use(wysiwyg, {
     hideModules: {
-        image: true,
+        image: false,
         code: true,
         orderedList: true,
         unorderedList: true,
         table: true,
-        headings: true
+        headings: true,
+        justifyLeft: true,
+        justifyCenter: true,
+        justifyRight: true
     }
 }); // config is optional. more below

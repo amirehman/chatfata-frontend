@@ -1,6 +1,7 @@
 export const state = () => ({
     sliderMode: false,
     currentSlide: "",
+    currentSlideType: "",
     currentSlideIndex: 0,
     sliderCount: 0,
     isNextSlide: true,
@@ -10,6 +11,9 @@ export const state = () => ({
 export const mutations = {
     mutateCurrentSlide: function(state, payload) {
         state.currentSlide = payload;
+    },
+    mutateCurrentSlideType: function(state, payload) {
+        state.currentSlideType = payload;
     },
     mutateSlideMode: function(state, payload) {
         state.sliderMode = payload;

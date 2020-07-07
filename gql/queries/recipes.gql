@@ -8,6 +8,17 @@ query {
       difficulty
       prep_time
       status
+      country {
+        id
+        name
+        native
+        emoji
+        iso3
+      }
+      state {
+        id
+        name
+      }
       author {
         id
         name

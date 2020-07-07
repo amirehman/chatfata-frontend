@@ -1,0 +1,9 @@
+query {
+  countries {
+    id
+    name
+    native
+    emoji
+    iso3
+  }
+}

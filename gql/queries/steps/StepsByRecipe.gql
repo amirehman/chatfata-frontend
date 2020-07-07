@@ -1,0 +1,11 @@
+query($recipe_id: Int!) {
+  stepsByRecipe(
+    recipe_id: $recipe_id
+    orderBy: [{ field: "order", order: ASC }]
+  ) {
+    id
+    step
+    type
+    order
+  }
+}

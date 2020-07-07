@@ -1,5 +1,77 @@
 <template>
   <div class="mb-6 md:mb-12">
+    <div
+      class="apply-for-channel-modal w-full h-screen fixed left-0 top-0 z-10 bg-black-transparent-4 flex items-center justify-center"
+      @click.self="isChannelModal = false"
+      :class="isChannelModal ? 'flex' : 'hidden'"
+    >
+      <Loader v-if="submitting" />
+      <div v-else class="w-full md:w-1/2">
+        <div class="inner bg-white p-5 rounded shadow-xl" v-if="!applied">
+          <form @submit.prevent="applyForChannel">
+            <h2 class="text-xl font-medium tracking-wide">
+              Appling for channel
+            </h2>
+            <hr class="my-3 bg-gray-300" />
+            <div class="content text-gray-800">
+              <p>
+                Start by adding one of your recipe video channel. You can add
+                more once your channel request approved.
+              </p>
+            </div>
+
+            <div class="radio-buttons mt-5">
+              <label for="channeltype" class="block mb-1"
+                >Select platform</label
+              >
+              <client-only>
+                <el-select required v-model="data.type" placeholder="Select">
+                  <el-option
+                    class="capitalize"
+                    v-for="item in channelTypes"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </client-only>
+            </div>
+
+            <div>
+              <div class="element">
+                <label class="block mt-5 capitalize" for="channel">
+                  Channel URL</label
+                >
+                <input
+                  v-model="data.url"
+                  type="url"
+                  required
+                  name="channel"
+                  class="border rounded px-3 py-2 w-full focus:outline-none focus:bg-theme-gray"
+                />
+              </div>
+              <!-- element -->
+            </div>
+            <div class="modal-footer mt-5">
+              <button
+                type="submit"
+                class="border border-theme-yellow rounded py-2 px-5 focus:outline-none hover:bg-theme-yellow text-theme-yellow transition ease-in-out duration-300 bg-transparent hover:text-white"
+              >
+                Apply
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="inner bg-white p-5 rounded shadow-xl" v-else>
+          <p>
+            Your request for channels is under reviews. we will let you know by
+            email when its approved.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="max-w-6xl xxl:max-w-screen-xl mx-auto">
       <div class="section-header mb-6 md:mb-12 text-center md:text-left">
         <div class="flex flex-wrap md:flex-no-wrap">
@@ -65,15 +137,18 @@
               </div>
               <!-- category title end -->
               <div
+
                 v-if="user.info"
                 class="recipe-short-description text-gray-700 dark:text-gray-400 mt-3 text-base xxl:text-lg content"
               >
                 <p>{{ user.info.about }}</p>
               </div>
+              <div v-else class="h-auto md:h-24"></div>
               <!-- recipe short description -->
 
-              <div class="profile-social">
-                <p class="text-base mb-2">Watch my recipes on</p>
+              <div class="profile-social" v-if="isChannel">
+                <div>
+                <p class="text-base mb-2 text-gray-800">Watch my recipes on</p>
                 <ul
                   class="flex items-center justify-center md:justify-start text-gray-800 dark:text-gray-400"
                 >
@@ -84,30 +159,48 @@
                     :title="social.media.name"
                   >
                     <a :href="social.link" target="_blank">
-                      <svg
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="fill-current"
-                        :class="
-                          social.media.name === 'Facebook'
-                            ? ' w-6 h-6'
-                            : ' w-1.7rem h-1.7rem'
-                        "
-                        v-html="social.media.icon"
+                      <YoutubeIcon
+                        v-if="social.media.name === 'Youtube'"
+                        width="w-6"
+                        height="h-6"
+                      />
+                      <FacebookIcon
+                        v-else-if="social.media.name === 'Facebook'"
+                        width="w-5"
+                        height="h-5"
+                      />
+                      <InstagramIcon
+                        v-if="social.media.name === 'Instagram'"
+                        width="w-6"
+                        height="h-6"
+                      />
+                      <TiktokIcon
+                        v-if="social.media.name === 'Tiktok'"
+                        width="w-6"
+                        height="h-6"
                       />
                     </a>
                   </li>
                 </ul>
               </div>
+              </div>
             </div>
             <!-- recipe header info end -->
-            <div v-show="isValidUser && !isChannel">
+            <div
+              v-show="
+                isValidUser && !isChannel && !applied && !user.application
+              "
+            >
               <button
+                @click="isChannelModal = true"
                 title="Apply for a channel if you want to upload your own recipes"
-                class="mt-5 md:mt-0 border-2 border-theme-yellow py-2 px-3 rounded bg-transparent cursor-pointer hover:bg-theme-yellow text-theme-yellow dark:text-theme-yellow hover:text-gray-800 transition ease-in-out duration-300"
+                class="focus:outline-none focus:bg-theme-gray mt-5 md:mt-0 border  py-2 px-3 rounded bg-transparent border-gray-400 hover:bg-theme-gray hover:bg-white cursor-pointer  text-sm font-medium tracking-wide text-gray-800 dark:text-gray-400 transition ease-in-out duration-300"
               >
-                Apply for Channel
+                <span>Apply for Channel</span>
               </button>
+            </div>
+            <div class="text-sm text-theme-yellow" v-if="user.application">
+              <span v-if="user.application.status === 'pending'">You application is in review. It will take 24 hour.</span>
             </div>
           </div>
         </div>
@@ -117,7 +210,15 @@
     <template v-if="isChannel">
       <ProfileNavbar :user="user" />
     </template>
-    <hr v-else class="">
+    <hr v-else class="" />
+
+    <client-only>
+      <Keypress
+        key-event="keydown"
+        :key-code="27"
+        @success="isChannelModal = false"
+      />
+    </client-only>
   </div>
 </template>
 
@@ -125,7 +226,37 @@
 import ProfileNavbar from "./ProfileNavbar";
 export default {
   props: ["user"],
-  components: { ProfileNavbar },
+  data() {
+    return {
+      channelTypes: [
+        {
+          value: 1,
+          label: "youtube"
+        },
+        {
+          value: 2,
+          label: "facebook"
+        },
+        {
+          value: 3,
+          label: "instagram"
+        },
+        {
+          value: 4,
+          label: "tiktok"
+        }
+      ],
+      channelType: "1",
+      isChannelModal: false,
+      applied: false,
+      submitting: false,
+      data: {
+        type: 1,
+        url: "https://"
+      }
+    };
+  },
+  components: { ProfileNavbar, Keypress: () => import("vue-keypress") },
   computed: {
     smallAvatar() {
       if (this.currentUser) {
@@ -137,6 +268,9 @@ export default {
     },
     isAuthenticated() {
       return this.$store.getters["user/isAuthenticated"];
+    },
+    isVerified() {
+      return this.$store.getters["user/isVerified"];
     },
     isChannel() {
       return this.$store.getters["user/isChannel"];
@@ -157,6 +291,39 @@ export default {
         return roles.includes("channel");
       }
     }
+  },
+  methods: {
+    applyForChannel() {
+      this.submitting = true;
+      this.$store
+        .dispatch("user/applyForChannel", {
+          user_id: this.currentUser.id,
+          type: this.data.type,
+          url: this.data.url
+        })
+        .then(response => {
+          if (response.status === 201) {
+            this.applied = true;
+          }
+          this.submitting = false;
+        })
+        .catch(error => {
+          this.applied = false;
+          console.log(error);
+        });
+    }
   }
 };
 </script>
+
+<style lang="scss">
+.el-select-dropdown__item.selected {
+  color: #fca311;
+}
+.el-input__inner {
+  text-transform: capitalize;
+}
+.el-select-dropdown.el-popper {
+  top: 645px!important;
+}
+</style>

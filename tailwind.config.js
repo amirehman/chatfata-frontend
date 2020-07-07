@@ -10,10 +10,13 @@ module.exports = {
             colors: {
                 "theme-yellow-dark": "#f9c22e",
                 "theme-yellow": "#fca311",
+                "theme-yellow-light": "#ffad26",
+                "theme-yellow-dark": "#e39412",
                 "theme-red": "#c0392b",
                 "theme-red-dark": "#d9c10c",
                 "theme-orange": "#e67e22",
-                "dark-mode": "#2f3542"
+                "dark-mode": "#2f3542",
+                "theme-gray": "#f8f9fa"
             },
             backgroundColor: theme => ({
                 "theme-yellow-dark": "#f9c22e",

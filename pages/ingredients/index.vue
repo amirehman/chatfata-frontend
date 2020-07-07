@@ -6,7 +6,7 @@
           <div class="w-full">
             <h1
               class="capitalize text-2xl text-gray-900 dark:text-gray-300"
-            >Browse recipe by ingredients</h1>
+            >Browse recipes by ingredients</h1>
             <div class="w-auto text-base xxl:text-lg mt-2 text-gray-800 dark:text-gray-400">
               <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit numquam culpa
@@ -42,7 +42,7 @@
                 <nuxt-link
                   :to="`/ingredients/${ingred.ingredient.slug}`"
                   href
-                  class="text-base text-center text-gray-800 dark:text-gray-400 block dark:focus:text-orange-500 focus:text-orange-500 hover:text-orange-500"
+                  class="text-base text-center text-gray-800 dark:text-gray-400 block dark:focus:text-orange-500 focus:text-orange-500 hover:text-orange-500 capitalize"
                 >{{ingred.ingredient.title}}</nuxt-link>
             </li>
           </ul>

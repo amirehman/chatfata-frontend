@@ -58,6 +58,7 @@ export default {
      ** Global CSS
      */
     css: [
+        "pretty-checkbox/src/pretty-checkbox.scss",
         "vue-wysiwyg/dist/vueWysiwyg.css",
         "vue-croppa/dist/vue-croppa.css",
         "filepond/dist/filepond.min.css",
@@ -77,6 +78,13 @@ export default {
         { src: "~/plugins/vue-croppa", ssr: false },
         { src: "~/plugins/vue-laravel-errors", ssr: false },
         { src: "~/plugins/vue-filepond", mode: "client" },
+        { src: "~/plugins/vue-material-checkbox", mode: "client" },
+        { src: "~/plugins/global-components", mode: "client" },
+        { src: "~/plugins/vue-tippy", mode: "client" },
+        { src: "~/plugins/vue2-touch-events", mode: "client" },
+        { src: "~/plugins/vue-draggable", mode: "client" },
+        { src: "~/plugins/vue-uicomponents", mode: "client" },
+        // { src: "~/plugins/vue-unique-id", mode: "client" },
         { src: "~/plugins/vue-toastify", mode: "client" }
     ],
     /*
@@ -116,7 +124,21 @@ export default {
             "editr--toolbar",
             "editr",
             "editr--content",
-            "icon-remove"
+            "icon-remove",
+            "pretty",
+            "p-default",
+            "p-warning",
+            "el-scrollbar",
+            "el-select-dropdown",
+            "el-popper",
+            "is-horizontal",
+            "el-scrollbar__thumb",
+            "el-scrollbar__bar",
+            "el-select-dropdown__item",
+            "el-scrollbar__wrap",
+            "el-select-dropdown__wrap",
+            "el-select-dropdown__list",
+            "el-scrollbar__view"
         ]
     },
 

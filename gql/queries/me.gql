@@ -1,9 +1,15 @@
-query{
+query {
   me {
     id
     name
     username
     email
+    email_verified_at
+    application {
+      status
+      channel_type
+      channel_url
+    }
     roles {
       name
     }

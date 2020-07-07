@@ -2,7 +2,7 @@
   <div>
     <nuxt-link
       :to="`/recipes/${recipe.slug}`"
-      class="block pl-5 border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-dark-mode-light text-left flex items-center justify-between"
+      class="block pl-5 border-b dark:border-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:dark-mode-light hover:bg-gray-100 dark:hover:bg-dark-mode-light text-left flex items-center justify-between"
       :class="mobile === 'true' ? 'text-sm' : ''"
     >
       <span class="w-full">{{recipe.title}}</span>

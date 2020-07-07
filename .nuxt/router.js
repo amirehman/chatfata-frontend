@@ -6,10 +6,13 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _8dcfbeb4 = () => interopDefault(import('../pages/about.vue' /* webpackChunkName: "pages/about" */))
 const _6e5d2571 = () => interopDefault(import('../pages/add-recipe.vue' /* webpackChunkName: "pages/add-recipe" */))
 const _53e1390e = () => interopDefault(import('../pages/contact.vue' /* webpackChunkName: "pages/contact" */))
+const _5268b444 = () => interopDefault(import('../pages/forgot-password.vue' /* webpackChunkName: "pages/forgot-password" */))
 const _07baf644 = () => interopDefault(import('../pages/ingredients/index.vue' /* webpackChunkName: "pages/ingredients/index" */))
 const _bb10c2fc = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _09a36a4e = () => interopDefault(import('../pages/privacy-policy.vue' /* webpackChunkName: "pages/privacy-policy" */))
 const _8c607cfe = () => interopDefault(import('../pages/recipes/index.vue' /* webpackChunkName: "pages/recipes/index" */))
+const _3c87d31a = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
+const _26236942 = () => interopDefault(import('../pages/search.vue' /* webpackChunkName: "pages/search" */))
 const _5aacfd7c = () => interopDefault(import('../pages/ingredients/_ingredient.vue' /* webpackChunkName: "pages/ingredients/_ingredient" */))
 const _c09dc7c8 = () => interopDefault(import('../pages/recipes/_recipe.vue' /* webpackChunkName: "pages/recipes/_recipe" */))
 const _4e60092a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -47,6 +50,10 @@ export const routerOptions = {
     component: _53e1390e,
     name: "contact"
   }, {
+    path: "/forgot-password",
+    component: _5268b444,
+    name: "forgot-password"
+  }, {
     path: "/ingredients",
     component: _07baf644,
     name: "ingredients"
@@ -62,6 +69,14 @@ export const routerOptions = {
     path: "/recipes",
     component: _8c607cfe,
     name: "recipes"
+  }, {
+    path: "/register",
+    component: _3c87d31a,
+    name: "register"
+  }, {
+    path: "/search",
+    component: _26236942,
+    name: "search"
   }, {
     path: "/ingredients/:ingredient",
     component: _5aacfd7c,

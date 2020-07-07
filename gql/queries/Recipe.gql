@@ -5,6 +5,7 @@ query($slug: ID!) {
     slug
     difficulty
     prep_time
+    serves
     image
     video
     ingredient_note
@@ -18,10 +19,16 @@ query($slug: ID!) {
       id
       name
       username
+      email_verified_at
       avatar
       info {
         id
         about
+      }
+      application {
+        status
+        channel_type
+        channel_url
       }
       roles {
         id
@@ -44,6 +51,8 @@ query($slug: ID!) {
     steps {
       id
       step
+      type
+      order
     }
     ingredients {
       id
@@ -62,6 +71,17 @@ query($slug: ID!) {
     images {
       id
       file
+    }
+    country {
+      id
+      name
+      native
+      emoji
+      iso3
+    }
+    state {
+      id
+      name
     }
   }
 }

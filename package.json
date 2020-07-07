@@ -15,6 +15,7 @@
         "@nuxtjs/axios": "^5.10.3",
         "@nuxtjs/dotenv": "^1.4.1",
         "@nuxtjs/pwa": "^3.0.0-beta.20",
+        "element-ui": "^2.13.2",
         "eslint": "^6.8.0",
         "eslint-loader": "^4.0.2",
         "filepond": "^4.13.6",
@@ -24,7 +25,6 @@
         "nuxt": "^2.0.0",
         "nuxt-sweetalert2": "^1.0.0",
         "nuxt-vue-select": "^0.1.4",
-        "pretty-checkbox-vue": "^1.1.9",
         "swiper": "^5.4.1",
         "tiptap": "^1.27.1",
         "tiptap-extensions": "^1.29.1",
@@ -35,12 +35,18 @@
         "vue-filepond": "^6.0.2",
         "vue-keypress": "^2.1.1",
         "vue-laravel-errors": "^0.2.5",
+        "vue-tippy": "^4.4.0",
         "vue-toastify": "^1.8.0",
-        "vue-wysiwyg": "^1.7.2"
+        "vue-unique-id": "^3.1.0",
+        "vue-wysiwyg": "^1.7.2",
+        "vue2-touch-events": "^2.2.1",
+        "vuedraggable": "^2.23.2"
     },
     "devDependencies": {
         "@nuxtjs/tailwindcss": "^1.4.1",
+        "babel-plugin-component": "^1.1.1",
         "node-sass": "^4.14.1",
+        "pretty-checkbox-vue": "^1.1.9",
         "sass-loader": "^8.0.2",
         "tailwindcss-spinner": "^1.0.0"
     }

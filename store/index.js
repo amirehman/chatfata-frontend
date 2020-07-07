@@ -2,7 +2,7 @@ export const state = () => ({
     storageUrl: process.env.STORAGE_URL,
     baseUrl: process.env.BASE_URL,
     serverUrl: process.env.SERVER_URL,
-    sideNav: false,
+    sideNav: true,
     theme: "dark-mode",
     searchMode: false,
     wiki: null

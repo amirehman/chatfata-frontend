@@ -8,7 +8,7 @@
           type="button"
           class="inline-flex justify-center w-full rounded-md px-4 py-2 text-sm leading-5 font-medium text-gray-700 dark:text-gray-400 hover:text-gray-500 focus:outline-none active:text-gray-800"
         >
-          {{user.username}}
+          {{user.name}}
           <svg
             class="-mr-1 ml-2 h-5 w-5"
             fill="currentColor"

@@ -3,7 +3,13 @@ query($username: ID!) {
     id
     name
     username
+    email_verified_at
     avatar
+    application {
+      status
+      channel_type
+      channel_url
+    }
     info {
       id
       about
@@ -29,10 +35,27 @@ query($username: ID!) {
       difficulty
       prep_time
       status
+      country {
+        id
+        name
+        native
+        emoji
+        iso3
+      }
+      state {
+        id
+        name
+      }
       author {
         id
         name
         username
+        email_verified_at
+        application {
+          status
+          channel_type
+          channel_url
+        }
       }
       meals {
         id

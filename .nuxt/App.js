@@ -9,9 +9,10 @@ import {
 } from './utils'
 
 import NuxtLoading from './components/nuxt-loading.vue'
-import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import '../assets/css/tailwind.css'
+
+import '../node_modules/pretty-checkbox/src/pretty-checkbox.scss'
 
 import '../node_modules/vue-wysiwyg/dist/vueWysiwyg.css'
 
@@ -64,7 +65,7 @@ export default {
       }
     }, [
       loadingEl,
-      h(NuxtBuildIndicator),
+
       transitionEl
     ])
   },

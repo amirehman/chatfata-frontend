@@ -1,4 +1,5 @@
 import axios from "axios";
+import Vue from "vue";
 
 import RecipeQuery from "~/gql/queries/Recipe";
 
@@ -13,6 +14,9 @@ export const state = () => ({
     editingIngredient: null,
     editingIngredientIndex: null,
     isIngredientEditing: false,
+    checkNewStep: 0,
+    isTypeMode: false,
+    isTypeModeEditing: false,
 });
 
 export const getters = {
@@ -22,6 +26,15 @@ export const getters = {
 };
 
 export const mutations = {
+    isTypeModeEditing: function(state, payload) {
+        state.isTypeModeEditing = payload;
+    },
+    isTypeMode: function(state, payload) {
+        state.isTypeMode = payload;
+    },
+    checkNewStep: function(state, payload) {
+        state.checkNewStep += payload;
+    },
     editingIngredientIndex: function(state, payload) {
         state.editingIngredientIndex = payload;
     },
@@ -38,15 +51,11 @@ export const mutations = {
         state.ingredients = payload;
     },
     updateIngredients: function(state, payload) {
-        let ingredient = {
-            id: payload.ingredient.id,
-            title: payload.ingredient.title,
-            slug: payload.ingredient.slug,
-        };
-        state.ingredients[state.editingIngredientIndex].ingredient = ingredient;
+        state.checkNewStep += 1;
     },
     newIngredient: function(state, payload) {
         state.ingredients.push(payload);
+        state.checkNewStep += 1;
     },
     editingStep: function(state, payload) {
         state.editingStep = payload;
@@ -57,14 +66,28 @@ export const mutations = {
     editingStepOnly: function(state, payload) {
         state.editingStep.step = payload;
     },
+    editingStepTypeOnly: function(state, payload) {
+        if (payload) {
+            state.editingStep.type = "title";
+        } else {
+            state.editingStep.type = "step";
+        }
+    },
     steps: function(state, payload) {
         state.steps = payload;
     },
     updateSteps: function(state, payload) {
         state.steps[payload.index].step = payload.step;
+        if (payload.type) {
+            state.steps[payload.index].type = "title";
+        } else {
+            state.steps[payload.index].type = "step";
+        }
+        state.checkNewStep += 1;
     },
     newStep: function(state, payload) {
         state.steps.push(payload);
+        state.checkNewStep += 1;
     },
     isUserImageSideBar: function(state, payload) {
         state.isUserImageSideBar = payload;
@@ -80,9 +103,11 @@ export const mutations = {
     },
     deleteStep: function(state, payload) {
         state.steps.splice(payload, 1);
+        state.checkNewStep += 1;
     },
     deleteIngredient: function(state, payload) {
         state.ingredients.splice(payload, 1);
+        state.checkNewStep += 1;
     }
 };
 
@@ -111,6 +136,9 @@ export const actions = {
                     meals: data.meals,
                     prep_time: data.prep_time,
                     video: data.video,
+                    country: data.country,
+                    serves: data.serves,
+                    state: data.state,
                     image: data.image
                 })
                 .then(response => {
@@ -133,6 +161,9 @@ export const actions = {
                     meals: data.meals,
                     prep_time: data.prep_time,
                     video: data.video,
+                    country: data.country,
+                    serves: data.serves,
+                    state: data.state,
                     note: data.note,
                     image: data.image
                 })
@@ -176,6 +207,42 @@ export const actions = {
                 });
         });
     },
+    orderSteps(context, data) {
+        return new Promise((resolve, reject) => {
+            axios.defaults.headers.common["Authorization"] =
+                "Bearer " + this.$apolloHelpers.getToken();
+            axios
+                .patch(
+                    `${process.env.SERVER_URL}/api/order/steps/${data.recipe_id}`, {
+                        order: data.steps
+                    }
+                )
+                .then(response => {
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
+    orderIngredients(context, data) {
+        return new Promise((resolve, reject) => {
+            axios.defaults.headers.common["Authorization"] =
+                "Bearer " + this.$apolloHelpers.getToken();
+            axios
+                .patch(
+                    `${process.env.SERVER_URL}/api/order/ingredients/${data.recipe_id}`, {
+                        order: data.ingredients
+                    }
+                )
+                .then(response => {
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
     addStep(context, data) {
         return new Promise((resolve, reject) => {
             axios.defaults.headers.common["Authorization"] =
@@ -183,14 +250,17 @@ export const actions = {
             axios
                 .post(`${process.env.SERVER_URL}/api/steps`, {
                     step: data.step,
+                    type: data.title,
                     recipe_id: data.recipe_id
                 })
                 .then(response => {
                     let step = {
                         id: response.data.id,
-                        step: response.data.step
+                        step: response.data.step,
+                        type: response.data.type,
+                        order: response.data.order
                     };
-                    resolve(response);
+                    resolve(response); // console.log(response.data);
                     context.commit("newStep", step);
                 })
                 .catch(error => {
@@ -204,7 +274,8 @@ export const actions = {
                 "Bearer " + this.$apolloHelpers.getToken();
             axios
                 .patch(`${process.env.SERVER_URL}/api/steps/${data.id}`, {
-                    step: data.step
+                    step: data.step,
+                    type: data.type
                 })
                 .then(response => {
                     context.commit("updateSteps", data);
@@ -224,6 +295,24 @@ export const actions = {
                 .then(response => {
                     resolve(response);
                     context.commit("deleteStep", data.index);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
+    addIngredientType(context, data) {
+        return new Promise((resolve, reject) => {
+            axios.defaults.headers.common["Authorization"] =
+                "Bearer " + this.$apolloHelpers.getToken();
+            axios
+                .post(`${process.env.SERVER_URL}/api/ingredients/heading`, {
+                    amount: data.heading,
+                    recipe_id: data.recipe_id
+                })
+                .then(response => {
+                    resolve(response);
+                    context.commit("newIngredient", response);
                 })
                 .catch(error => {
                     reject(error);
@@ -260,40 +349,25 @@ export const actions = {
                 });
         });
     },
-    // updateStep(context, data) {
-    //     return new Promise((resolve, reject) => {
-    //         axios.defaults.headers.common["Authorization"] =
-    //             "Bearer " + this.$apolloHelpers.getToken();
-    //         axios
-    //             .patch(`${process.env.SERVER_URL}/api/steps/${data.id}`, {
-    //                 step: data.step
-    //             })
-    //             .then(response => {
-    //                 context.commit("updateSteps", data);
-    //                 resolve(response);
-    //             })
-    //             .catch(error => {
-    //                 reject(error);
-    //             });
-    //     });
-    // },
-    // updateStep(context, data) {
-    //     return new Promise((resolve, reject) => {
-    //         axios.defaults.headers.common["Authorization"] =
-    //             "Bearer " + this.$apolloHelpers.getToken();
-    //         axios
-    //             .patch(`${process.env.SERVER_URL}/api/steps/${data.id}`, {
-    //                 step: data.step
-    //             })
-    //             .then(response => {
-    //                 context.commit("updateSteps", data);
-    //                 resolve(response);
-    //             })
-    //             .catch(error => {
-    //                 reject(error);
-    //             });
-    //     });
-    // },
+    updateIngredientType(context, data) {
+        return new Promise((resolve, reject) => {
+            axios.defaults.headers.common["Authorization"] =
+                "Bearer " + this.$apolloHelpers.getToken();
+            axios
+                .patch(
+                    `${process.env.SERVER_URL}/api/ingredients/${data.id}/heading`, {
+                        amount: data.amount
+                    }
+                )
+                .then(response => {
+                    context.commit("updateIngredients", response.data);
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
     updateIngredient(context, data) {
         return new Promise((resolve, reject) => {
             axios.defaults.headers.common["Authorization"] =
@@ -302,6 +376,7 @@ export const actions = {
                 .patch(`${process.env.SERVER_URL}/api/ingredients/${data.id}`, {
                     amount: data.amount,
                     ingredient: data.ingredient,
+                    type: data.type,
                     note: data.note
                 })
                 .then(response => {

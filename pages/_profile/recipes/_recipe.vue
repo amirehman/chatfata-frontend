@@ -11,11 +11,11 @@
             <div class="w-full lg:w-4/5">
               <div class="form-element mb-5">
                 <label class="block">
-                  <span class="mb-2 block text-lg tracking-wide">Title</span>
+                  <span class="mb-1 block text-base tracking-wide">Title</span>
                   <input
                     type="text"
                     v-model="recipe.title"
-                    class="block w-full text-lg border border-gray-400 dark:border-gray-700 rounded bg-transparent p-3 focus:bg-gray-100 dark:focus:bg-dark-mode-light focus:outline-none"
+                    class="h-10 bg-white dark:bg-dark-mode border border-gray-300 dark:border-gray-800 rounded p-4 mr-4 w-full text-gray-800 dark:text-gray-400 text-base focus:outline-none focus:border-gray-400"
                   />
                 </label>
                 <p class="text-base text-theme-yellow mt-2" v-if="errors">
@@ -26,19 +26,19 @@
 
               <div class="form-element mb-5">
                 <label class="block">
-                  <span class="mb-2 block text-lg tracking-wide"
+                  <span class="mb-1 block text-base tracking-wide"
                     >Description</span
                   >
                 </label>
                 <!-- <recipe-editor v-model="recipe.body" /> -->
                 <client-only>
-                  <wysiwyg v-model="recipe.body" />
+                  <wysiwyg v-model="recipe.body" class="text-gray-800" />
                 </client-only>
               </div>
               <!-- form element -->
 
               <div class="form-element mb-5">
-                <label class="mb-2 block text-lg tracking-wide">Meal</label>
+                <label class="mb-1 block text-base tracking-wide">Meal</label>
                 <client-only>
                   <v-select
                     label="title"
@@ -56,27 +56,82 @@
               </div>
               <!-- form element -->
 
-              <div class="form-element mb-5">
-                <label class="mb-2 block text-lg tracking-wide"
-                  >Difficulty</label
-                >
-                <client-only>
-                  <v-select
-                    class="custom-select dark:text-gray-400"
-                    v-model="recipe.difficulty"
-                    required
-                    :options="difficulty"
-                  ></v-select>
-                </client-only>
-                <p class="text-base text-theme-yellow mt-2" v-if="errors">
-                  {{ errors.difficulty }}
-                </p>
+              <div class="flex">
+                <div class="form-element mb-5 w-full mr-5">
+                  <label class="mb-1 block text-base tracking-wide"
+                    >Difficulty</label
+                  >
+                  <client-only>
+                    <v-select
+                      class="custom-select dark:text-gray-400"
+                      v-model="recipe.difficulty"
+                      required
+                      :options="difficulty"
+                    ></v-select>
+                  </client-only>
+                  <p class="text-base text-theme-yellow mt-2" v-if="errors">
+                    {{ errors.difficulty }}
+                  </p>
+                </div>
+                <!-- form element -->
+                <div class="form-element mb-5 w-full recep-input-number">
+                  <label class="mb-1 block text-base tracking-wide">Serves</label>
+                  <client-only>
+                    <el-input-number
+                      v-model="recipe.serves"
+                      :min="1"
+                      :max="10"
+                    ></el-input-number>
+                  </client-only>
+                </div>
+                <!-- form element -->
               </div>
-              <!-- form element -->
 
               <div class="form-element mb-5">
+                <label class="mb-1 block text-base tracking-wide"
+                  >Select Cuisine</label
+                >
+                <div class=" flex">
+                  <div class="w-full mr-5">
+                    <label class="mb-1 block text-base tracking-wide"
+                      >Country</label
+                    >
+                    <client-only>
+                      <v-select
+                        label="name"
+                        required
+                        class="custom-select dark:text-gray-400"
+                        :reduce="country => country.id"
+                        v-model="recipe.country"
+                        :options="countries"
+                        @input="onCountrySelect"
+                      ></v-select>
+                    </client-only>
+                    <p class="text-base text-theme-yellow mt-2" v-if="errors">
+                      {{ errors.country }}
+                    </p>
+                  </div>
+                  <div class="w-full">
+                    <label class="mb-1 block text-base tracking-wide"
+                      >State</label
+                    >
+                    <client-only>
+                      <v-select
+                        label="name"
+                        class="custom-select dark:text-gray-400"
+                        :reduce="state => state.id"
+                        v-model="recipe.state"
+                        :options="states"
+                        :disabled="!states"
+                      ></v-select>
+                    </client-only>
+                  </div>
+                </div>
+              </div>
+              <!-- form element -->
+              <div class="form-element mb-5">
                 <label class="block">
-                  <span class="mb-2 block text-lg tracking-wide">
+                  <span class="mb-1 block text-base tracking-wide">
                     Preparation time
                     <small>(minuts)</small>
                   </span>
@@ -84,7 +139,7 @@
                     type="number"
                     required
                     v-model="recipe.prep_time"
-                    class="block w-full text-lg border border-gray-400 dark:border-gray-700 rounded bg-transparent p-3 focus:bg-gray-100 dark:focus:bg-dark-mode-light focus:outline-none"
+                    class="h-10 bg-white dark:bg-dark-mode border border-gray-300 dark:border-gray-800 rounded p-4 mr-4 w-full text-gray-800 dark:text-gray-400 text-base focus:outline-none focus:border-gray-400"
                   />
                 </label>
                 <p class="text-base text-theme-yellow mt-2" v-if="errors">
@@ -95,13 +150,13 @@
 
               <div class="form-element mb-5">
                 <label class="block">
-                  <span class="mb-2 block text-lg tracking-wide"
+                  <span class="mb-1 block text-base tracking-wide"
                     >Video URL</span
                   >
                   <input
                     type="url"
                     v-model="recipe.video"
-                    class="block w-full text-lg border border-gray-400 dark:border-gray-700 rounded bg-transparent p-3 focus:bg-gray-100 dark:focus:bg-dark-mode-light focus:outline-none"
+                    class="h-10 bg-white dark:bg-dark-mode border border-gray-300 dark:border-gray-800 rounded p-4 mr-4 w-full text-gray-800 dark:text-gray-400 text-base focus:outline-none focus:border-gray-400"
                   />
                 </label>
               </div>
@@ -109,7 +164,7 @@
 
               <div class="form-element mb-5">
                 <label class="block">
-                  <span class="mb-2 block text-lg tracking-wide"
+                  <span class="mb-1 block text-base tracking-wide"
                     >Add Note / Tips</span
                   >
                   <client-only>
@@ -119,13 +174,13 @@
               </div>
               <!-- form element -->
 
-              <div class="form-element mb-5 hidden md:block text-right">
+              <div class="form-element mb-5 hidden md:block">
                 <loader v-if="isLoading" />
                 <input
                   v-else
                   type="submit"
                   value="Update"
-                  class="focus:text-gray-800 focus:border-theme-yellow hover:bg-theme-yellow hover:border-theme-yellow hover:text-white transition ease-in-out duration-300 cursor-pointer w-auto text-lg border border-gray-400 dark:border-gray-700 rounded bg-transparent p-3 focus:bg-gray-100 dark:focus:bg-dark-mode-light focus:outline-none"
+                  class="h-10 focus:text-gray-800 focus:border-theme-yellow hover:bg-theme-yellow hover:border-theme-yellow hover:text-white transition ease-in-out duration-300 cursor-pointer w-auto text-base border border-gray-400 dark:border-gray-700 rounded bg-transparent px-5 focus:bg-gray-100 dark:focus:bg-dark-mode-light focus:outline-none"
                 />
               </div>
               <!-- form element -->
@@ -138,7 +193,7 @@
                   class="current-thumbnail mb-5"
                   v-if="recipe.image.length < 100"
                 >
-                  <span class="font-medium text-lg mb-3 block"
+                  <span class="font-medium text-base mb-2 block"
                     >Current Thumbnail</span
                   >
                   <v-lazy-image
@@ -156,7 +211,7 @@
                 <!-- current thumbnail -->
                 <div class="add-recipe form-element mb-5">
                   <label class="block">
-                    <span class="mb-4 block text-lg tracking-wide"
+                    <span class="mb-2 block text-base tracking-wide"
                       >Update Thumbnail</span
                     >
                     <client-only>
@@ -191,8 +246,8 @@
                   <input
                     v-else
                     type="submit"
-                    value="Submit"
-                    class="hover:bg-theme-yellow hover:border-theme-yellow hover:text-white transition ease-in-out duration-300 cursor-pointer w-auto text-lg border border-gray-400 dark:border-gray-700 rounded bg-transparent p-3 focus:bg-gray-100 dark:focus:bg-dark-mode-light focus:outline-none"
+                    value="Update"
+                    class="h-10 hover:bg-theme-yellow hover:border-theme-yellow hover:text-white transition ease-in-out duration-300 cursor-pointer w-auto text-base border border-gray-400 dark:border-gray-700 rounded bg-transparent px-5 focus:bg-gray-100 dark:focus:bg-dark-mode-light focus:outline-none"
                   />
                 </div>
                 <!-- form element -->
@@ -212,6 +267,8 @@ import gql from "graphql-tag";
 
 import RecipeQuery from "~/gql/queries/Recipe";
 import MealsQuery from "~/gql/queries/Meals";
+import CountiesQuery from "~/gql/queries/country/Countries";
+import StateByCountryQuery from "~/gql/queries/country/StatesByCountry";
 
 import ProfileHeader from "~/components/profile/ProfileHeader";
 import Loader from "~/components/templates/Loader";
@@ -231,8 +288,11 @@ export default {
       isLoading: false,
       errors: null,
       recipe: {},
+      states: [],
       updatedThumb: null,
-      newMeals: null
+      newMeals: null,
+      newCountry: null,
+      newState: null
     };
   },
 
@@ -247,6 +307,26 @@ export default {
         return (this.newMeals = newValue);
       }
     },
+    // updatedCountry: {
+    //   get() {
+    //     return (this.newCountry = this.recipe.country.map(e => {
+    //       return e.id;
+    //     }));
+    //   },
+    //   set(newValue) {
+    //     return (this.newCountry = newValue);
+    //   }
+    // },
+    // updatedState: {
+    //   get() {
+    //     return (this.newState = this.recipe.state.map(e => {
+    //       return e.id;
+    //     }));
+    //   },
+    //   set(newValue) {
+    //     return (this.newState = newValue);
+    //   }
+    // },
     storageUrl() {
       return this.$store.state.storageUrl;
     },
@@ -274,6 +354,22 @@ export default {
     }
   },
   methods: {
+    onCountrySelect() {
+      this.recipe.state = null;
+      let country = this.recipe.country;
+      // console.log(country)
+      this.getStates(country);
+    },
+    async getStates(id) {
+      this.states = await this.$apollo
+        .query({
+          query: StateByCountryQuery,
+          variables: {
+            country_id: id
+          }
+        })
+        .then(({ data }) => data && data.states);
+    },
     generateImage: function() {
       this.recipe.image = this.updatedThumb.generateDataUrl();
       return true;
@@ -292,6 +388,9 @@ export default {
           difficulty: this.recipe.difficulty,
           prep_time: this.recipe.prep_time,
           video: this.recipe.video,
+          country: this.recipe.country,
+          serves: this.recipe.serves,
+          state: this.recipe.state,
           note: this.recipe.ingredient_note,
           image: this.recipe.image
         })
@@ -309,6 +408,11 @@ export default {
     meals() {
       return {
         query: MealsQuery
+      };
+    },
+    countries() {
+      return {
+        query: CountiesQuery
       };
     }
   },

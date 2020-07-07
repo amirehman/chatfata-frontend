@@ -10,19 +10,34 @@
           v-show="sliderMode"
           class="slide w-full h-full sm:h-auto sm:w-3/4 lg:w-1/2 bg-white dark:bg-dark-mode rounded shadow-xl flex flex-col justify-between"
         >
-          <div class="header border-b border-gray-400 text-xl flex justify-between items-center">
-            <h3 class="w-auto p-3 border-r border-gray-400 sm:border-0">{{recipe.title}}</h3>
+          <div
+            class="header border-b border-gray-400 text-xl flex justify-between items-center"
+          >
+            <h3 class="w-auto p-3 border-r border-gray-400 sm:border-0">
+              {{ recipe.title }}
+            </h3>
             <span class="block w-24 text-center sm:text-right p-3">
-              <span class="text-base sm:text-xl text-gray-600 -mr-px">{{sliderCount}}</span>
+              <span class="text-base sm:text-xl -ml-px">{{
+                currentSlideIndex + 1
+              }}</span>
               <span class="text-sm">/</span>
-              <span class="text-base sm:text-xl -ml-px">{{currentSlideIndex + 1}}</span>
+              <span class="text-base sm:text-xl text-gray-600 -mr-px">{{
+                sliderCount
+              }}</span>
             </span>
           </div>
-          <div class="p-5 text-2xl dark:font-light leading-snug overflow-y-auto">
+          <div
+            class="p-5 text-2xl dark:font-light leading-snug overflow-y-auto"
+            v-touch:swipe.right="prevSlide"
+            v-touch:swipe.left="nextSlide"
+            :class="currentSlideType === 'title' ? 'bg-theme-yellow text-center capitalize' : 'bg-white'"
+          >
             <p v-html="currentSlide"></p>
           </div>
           <div class="footer border-t border-gray-400">
-            <div class="arrows text-gray-700 w-full flex items-center justify-between">
+            <div
+              class="arrows text-gray-700 w-full flex items-center justify-between"
+            >
               <span
                 class="p-3 hover:bg-gray-200 dark:hover:bg-dark-mode-light dark:text-gray-400 transition ease-in-out duration-300 cursor-pointer"
                 @click="prevSlide"
@@ -39,7 +54,10 @@
                 </svg>
               </span>
               <span v-else class="p-3">First</span>
-              <span class="p-3 cursor-pointer block sm:hidden" @click="slideModeOff">
+              <span
+                class="p-3 cursor-pointer block sm:hidden"
+                @click="slideModeOff"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="fill-current w-6 h-6 dark:text-gray-400"
@@ -95,6 +113,9 @@ export default {
     currentSlide() {
       return this.$store.state.slider.currentSlide;
     },
+    currentSlideType() {
+      return this.$store.state.slider.currentSlideType;
+    },
     currentSlideIndex() {
       return this.$store.state.slider.currentSlideIndex;
     },
@@ -112,27 +133,29 @@ export default {
     prevSlide() {
       const nextIndex = this.currentSlideIndex - 1;
       const slide = this.recipe.steps[nextIndex].step;
-      this.updateSlide(nextIndex, slide);
+      const type = this.recipe.steps[nextIndex].type;
+      this.updateSlide(nextIndex, slide, type);
     },
     nextSlide() {
       let nextIndex = this.currentSlideIndex + 1;
       const slide = this.recipe.steps[nextIndex].step;
-      this.updateSlide(nextIndex, slide);
+      const type = this.recipe.steps[nextIndex].type;
+      this.updateSlide(nextIndex, slide, type);
     },
     slideModeOff() {
       this.$store.commit("slider/mutateSlideMode", false);
       this.$store.commit("slider/mutateIsPrevSlide", true);
       this.$store.commit("slider/mutateIsNextSlide", true);
     },
-    updateSlide(index, slide) {
+    updateSlide(index, slide, type) {
       this.$store.commit("slider/mutateCurrentSlide", slide);
       this.$store.commit("slider/currentSlideIndex", index);
+      this.$store.commit("slider/mutateCurrentSlideType", type);
       this.$store.commit("slider/checkNextPrev", index);
     }
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 .fade-enter-active,
@@ -141,7 +164,7 @@ export default {
   transform: scale(1);
 }
 .fade-enter,
-.fade-leave-to{
+.fade-leave-to {
   opacity: 0;
   transform: scale(0);
 }

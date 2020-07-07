@@ -9,7 +9,7 @@
         </div>
         <!-- section header end -->
 
-        <div>This page is protected with a middleware which checks if the gql request is authenticated</div>
+        <div>Edit page coming soon...</div>
       </div>
       <!-- container end -->
     </section>

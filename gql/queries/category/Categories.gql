@@ -5,6 +5,9 @@ query {
       title
       slug
       image
+      recipes {
+        id
+      }
     }
   }
 }

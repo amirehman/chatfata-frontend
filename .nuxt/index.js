@@ -26,6 +26,12 @@ import nuxt_plugin_vueeditor_3c5040ec from 'nuxt_plugin_vueeditor_3c5040ec' // S
 import nuxt_plugin_vuecroppa_4193bac4 from 'nuxt_plugin_vuecroppa_4193bac4' // Source: ../plugins/vue-croppa (mode: 'client')
 import nuxt_plugin_vuelaravelerrors_370eee1c from 'nuxt_plugin_vuelaravelerrors_370eee1c' // Source: ../plugins/vue-laravel-errors (mode: 'client')
 import nuxt_plugin_vuefilepond_400a1a4e from 'nuxt_plugin_vuefilepond_400a1a4e' // Source: ../plugins/vue-filepond (mode: 'client')
+import nuxt_plugin_vuematerialcheckbox_3332536c from 'nuxt_plugin_vuematerialcheckbox_3332536c' // Source: ../plugins/vue-material-checkbox (mode: 'client')
+import nuxt_plugin_globalcomponents_91a8526c from 'nuxt_plugin_globalcomponents_91a8526c' // Source: ../plugins/global-components (mode: 'client')
+import nuxt_plugin_vuetippy_73799e27 from 'nuxt_plugin_vuetippy_73799e27' // Source: ../plugins/vue-tippy (mode: 'client')
+import nuxt_plugin_vue2touchevents_0aa7791c from 'nuxt_plugin_vue2touchevents_0aa7791c' // Source: ../plugins/vue2-touch-events (mode: 'client')
+import nuxt_plugin_vuedraggable_06caa360 from 'nuxt_plugin_vuedraggable_06caa360' // Source: ../plugins/vue-draggable (mode: 'client')
+import nuxt_plugin_vueuicomponents_44ec5d07 from 'nuxt_plugin_vueuicomponents_44ec5d07' // Source: ../plugins/vue-uicomponents (mode: 'client')
 import nuxt_plugin_vuetoastify_19c1a652 from 'nuxt_plugin_vuetoastify_19c1a652' // Source: ../plugins/vue-toastify (mode: 'client')
 
 // Component: <ClientOnly>
@@ -242,6 +248,30 @@ async function createApp (ssrContext) {
 
   if (process.client && typeof nuxt_plugin_vuefilepond_400a1a4e === 'function') {
     await nuxt_plugin_vuefilepond_400a1a4e(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuematerialcheckbox_3332536c === 'function') {
+    await nuxt_plugin_vuematerialcheckbox_3332536c(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_globalcomponents_91a8526c === 'function') {
+    await nuxt_plugin_globalcomponents_91a8526c(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuetippy_73799e27 === 'function') {
+    await nuxt_plugin_vuetippy_73799e27(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vue2touchevents_0aa7791c === 'function') {
+    await nuxt_plugin_vue2touchevents_0aa7791c(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuedraggable_06caa360 === 'function') {
+    await nuxt_plugin_vuedraggable_06caa360(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vueuicomponents_44ec5d07 === 'function') {
+    await nuxt_plugin_vueuicomponents_44ec5d07(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vuetoastify_19c1a652 === 'function') {

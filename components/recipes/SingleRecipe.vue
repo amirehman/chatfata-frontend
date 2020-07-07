@@ -24,7 +24,8 @@
               <nuxt-link
                 :to="`/recipes/${recipe.slug}`"
                 class="hover:text-orange-500 transition duration-300"
-              >{{recipe.title}}</nuxt-link>
+                >{{ recipe.title }}</nuxt-link
+              >
             </h3>
             <p class="text-sm pt-2">
               By
@@ -32,12 +33,16 @@
                 :to="`/${recipe.author.username}`"
                 href
                 class="hover:underline hover:text-orange-700 dark:hover:text-orange-400 transition duration-300"
-              >{{recipe.author.name}}</nuxt-link>
+                >{{ recipe.author.name }}</nuxt-link
+              >
             </p>
           </div>
           <div class="w-auto">
-            <span class="cursor-pointer">
-              <i data-vi="heart" data-vi-primary="#c0392b" data-vi-size="35"></i>
+            <span
+              class="inline-block leading-none -mt-1 text-3xl"
+              name="flag"
+              v-if="recipe.country.length > 0"
+              >{{ recipe.country[0].emoji }}
             </span>
           </div>
         </div>
@@ -45,22 +50,37 @@
       <!-- ri info end -->
 
       <div
-        class="absolute bottom-0 left-0 text-sm w-full border-t dark:border-gray-700 ri-footer p-3 py-2 tracking-wider text-gray-900 dark:text-gray-400"
+        class="absolute bottom-0 left-0 text-xs w-full border-t dark:border-gray-700 ri-footer p-3 py-2 tracking-wider text-gray-900 dark:text-gray-400"
       >
-        <div class="flex">
-          <div class="w-full flex items-center">
+        <div class="flex justify-between">
+          <div class="flex items-center">
             <span>
-              <a href class="hover:text-orange-700 transition duration-300">Easy</a>
-            </span>,
-            <span class="ml-1">
-              <a href class="hover:text-orange-700 transition duration-300">Breakfast</a>
+              <a href class="hover:text-orange-700 transition duration-300"
+                >{{ recipe.difficulty }}
+              </a> </span
+            >,
+            <span>
+              <a
+                href
+                class="ml-1 hover:text-orange-700 transition duration-300"
+              >
+                <span v-for="(meal, i) in recipe.meals" :key="i">
+                  <span v-if="i != 0">, </span>
+                  {{ meal.title }}
+                </span>
+              </a>
             </span>
           </div>
-          <div class="w-auto flex items-center">
+          <div class="flex items-center">
             <span class>
-              <i data-vi="clock" data-vi-primary="#2d3748" data-vi-accent="#fff" data-vi-size="20"></i>
+              <i
+                data-vi="clock"
+                data-vi-primary="#2d3748"
+                data-vi-accent="#fff"
+                data-vi-size="20"
+              ></i>
             </span>
-            <span>35min</span>
+            <span>{{ recipe.prep_time }} min</span>
           </div>
         </div>
       </div>

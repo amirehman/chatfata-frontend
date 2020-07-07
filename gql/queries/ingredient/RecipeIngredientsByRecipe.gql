@@ -1,0 +1,17 @@
+query($recipe_id: Int!) {
+  recipeIngredientsByRecipe(
+    recipe_id: $recipe_id
+    orderBy: [{ field: "order", order: ASC }]
+  ) {
+    id
+    ingredient {
+      id
+      title
+      slug
+    }
+    amount
+    note
+    type
+    order
+  }
+}
